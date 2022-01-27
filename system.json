@@ -5,8 +5,12 @@
   "version": "0.0.1",
   "author": "Furcht",
   "scripts": [ ],
-  "esmodules": [ ],
-  "styles": [ ],
+  "esmodules": [
+    "3.5e.js"
+  ],
+  "styles": [
+    "3.5e.css"
+  ],
   "packs": [
     {
       "name": "races",
