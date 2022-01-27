@@ -7,7 +7,72 @@
   "scripts": [ ],
   "esmodules": [ ],
   "styles": [ ],
-  "packs": [ ],
+  "packs": [
+    {
+      "name": "races",
+      "label": "Races",
+      "system": "dnd3.5e",
+      "path": "./packs/races.db",
+      "entity": "Item",
+      "type": "Item"
+    },
+    {
+      "name": "classes",
+      "label": "Classes",
+      "system": "dnd3.5e",
+      "path": "./packs/classes.db",
+      "entity": "Item",
+      "type": "Item"
+    },
+    {
+      "name": "skills",
+      "label": "Skills",
+      "system": "dnd3.5e",
+      "path": "./packs/skills.db",
+      "entity": "JournalEntry",
+      "type": "JournalEntry"
+    },
+    {
+      "name": "feats",
+      "label": "Feats",
+      "system": "dnd3.5e",
+      "path": "./packs/feats.db",
+      "entity": "JournalEntry",
+      "type": "JournalEntry"
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "system": "dnd3.5e",
+      "path": "./packs/equipment.db",
+      "entity": "Item",
+      "type": "Item"
+    },
+    {
+      "name": "goods",
+      "label": "Goods",
+      "system": "dnd3.5e",
+      "path": "./packs/goods.db",
+      "entity": "Item",
+      "type": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "Spells",
+      "system": "dnd3.5e",
+      "path": "./packs/spells.db",
+      "entity": "Item",
+      "type": "Item"
+    },
+    {
+      "name": "monsters",
+      "label": "Monster Manual",
+      "system": "dnd3.5e",
+      "path": "./packs/monsters.db",
+      "entity": "Actor",
+      "type": "Actor"
+    },
+  ],
   "languages": [
     {
       "lang": "en",
@@ -15,4 +80,10 @@
       "path": "lang/en.json"
     }
   ],
+  "socket": false,
+  "initiative": "1d20",
+  "gridDistance": 10,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "resources.health",
+  "secondaryTokenAttribute": "resources.power",
 }
