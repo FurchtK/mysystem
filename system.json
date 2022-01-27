@@ -65,6 +65,14 @@
       "type": "Item"
     },
     {
+      "name": "rules",
+      "label": "Rules",
+      "system": "dnd3.5e",
+      "path": "./packs/rules.db",
+      "entity": "JournalEntry",
+      "type": "JournalEntry"
+    },
+    {
       "name": "monsters",
       "label": "Monster Manual",
       "system": "dnd3.5e",
