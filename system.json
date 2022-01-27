@@ -1,0 +1,18 @@
+{
+  "name": "3.5e",
+  "title": "Dungeons and Dragons 3.5e",
+  "description": "This game system is used to play Dungeons and Dragons 3.5e",
+  "version": "0.0.1",
+  "author": "Furcht",
+  "scripts": [ ],
+  "esmodules": [ ],
+  "styles": [ ],
+  "packs": [ ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+}
