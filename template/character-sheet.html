@@ -1,283 +1,2688 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<html><head>
+	<title>3.5e Template :: Dungeons &amp; Dragons 3.5e :: Myth-Weavers Online Character Sheets</title>
 
-    {{!-- Sheet Header --}}
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
-        <section class="header-details flexrow">
-            {{> "systems/dnd5e/templates/actors/parts/actor-warnings.html"}}
 
-            <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
-            </h1>
+	<meta name="keywords" content="play by post pbp pbem email message board forum character sheets roleplaying d20 wod dungeons &amp; dragons d&amp;d 4e 4 edition world of darkness serenity rpg npc rpg">
+	<meta name="description" content="Myth-Weavers is an online community that focuses on play by post gaming. We are home to hundreds of active games, many still recruiting. Our character sheet system supports dozens systems, including d20, GURPS, WoD, and even the new D&amp;D5e. Come join our ever-growing community of thousands of active members!">
 
-            <aside class="header-exp flexcol">
-                <div class="charlevel" title="{{multiclassLabels}}">
-                    <label>{{ localize "DND5E.Level" }} {{data.details.level}}</label>
-                    <span class="levels">{{classLabels}}</span>
-                </div>
+	<link rel="stylesheet" href="/assets/css/sheets.css?_=1499962733" type="text/css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/_sheet_templates/legacy_dnd35/legacy_dnd35.css?_=1558807020 " type="text/css"></head>
+<body>
+	<!-- Google Tag Manager -->
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PHK5BX"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-PHK5BX"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-PHK5BX');</script>
+	<!-- End Google Tag Manager -->
 
-                {{#unless disableExperience}}
-                <div class="experience flexrow">
-                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0" data-dtype="Number"/>
-                    <span class="sep">/</span>
-                    <span class="max">{{data.details.xp.max}}</span>
-                </div>
-                <div class="xpbar">
-                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
-                </div>
-                {{/unless}}
-            </aside>
+	<div id="username_email_warning" class="container hidden-print" style="display: none">
+	    <div class="alert alert-warning" style="color: #a56c09">
+	    	<p>Hello, There is a forthcoming change to Myth-Weavers login. </p>
+	    	<p><strong>Starting March 29, 2018, you will need to use your email address</strong> to log in (as opposed to username). Please ensure that we have the correct email for you, by visiting your <a href="https://www.myth-weavers.com/profile.php?do=editprofile" target="_blank" rel="noopener">User Control Panel</a>. If it is out of date, please take a moment to update it. 
+	    	</p>
+	    	<p>For more information, <a href="https://www.myth-weavers.com/showthread.php?t=434341" target="_blank" rel="noopener">see the announcement</a>.</p>
+	    </div>
+	</div>
 
-            {{!-- Character Summary --}}
-            <ul class="summary flexrow">
-                <li>
-                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'DND5E.Race' }}"/>
-                </li>
-                <li>
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
-                </li>
-                <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
-                </li>
-                <li class="proficiency">
-                    <span>{{ localize "DND5E.Proficiency" }} {{labels.proficiency}}</span>
-                </li>
-            </ul>
+	
+	
 
-            {{!-- Header Attributes --}}
-            <ul class="attributes flexrow">
-                <li class="attribute health">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.HitPoints" }}</h4>
-                    <div class="attribute-value multiple">
-                        <input name="data.attributes.hp.value" type="text"
-                               value="{{data.attributes.hp.value}}" placeholder="10"
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsCurrent'}}">
-                        <span class="sep"> / </span>
-                        <input name="data.attributes.hp.max" type="text"
-                               value="{{data.attributes.hp.max}}" placeholder="10" 
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsMax'}}">
-                    </div>
-                    <footer class="attribute-footer">
-                        <input name="data.attributes.hp.temp" type="text" class="temphp"
-                               placeholder="+{{ localize 'DND5E.Temp' }}"
-                               value="{{data.attributes.hp.temp}}" data-dtype="Number"
-                               title="{{localize 'DND5E.HitPointsTemp'}}">
-                        <input name="data.attributes.hp.tempmax" type="text" class="temphp"
-                               placeholder="+{{ localize 'DND5E.Max' }}"
-                               value="{{data.attributes.hp.tempmax}}" data-dtype="Number"
-                               title="{{localize 'DND5E.HitPointsTempMax'}}">
-                    </footer>
-                </li>
+    <div id="topAdContainer" class="container">
+    	<div style="width: 728px; height: 90px; margin: 0 auto 20px auto;">
+			<!-- Leaderboard -->
+			<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-1634190930768892" data-ad-slot="2791069216"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;"><iframe id="google_ads_frame0"></iframe></iframe></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+    	</div>
+    </div>
 
-                <li class="attribute hit-dice">
-                    <h4 class="attribute-name box-title">
-                        {{ localize "DND5E.HitDice" }}
-                        <a class="config-button" data-action="hit-dice" title="{{localize 'DND5E.HitDiceConfig'}}"><i class="fas fa-cog"></i></a>
-                    </h4>
-                    <div class="attribute-value multiple">
-                        <label class="hit-dice">
-                            <span title="{{localize 'DND5E.HitDiceRemaining'}}">{{data.attributes.hd}}</span>
-                            <span class="sep"> / </span>
-                            <span title="{{localize 'DND5E.HitDiceMax'}}">{{data.details.level}}</span>
-                        </label>
-                    </div>
-                    <footer class="attribute-footer">
-                        <a class="rest short-rest" title="{{localize 'DND5E.ShortRest'}}">{{ localize "DND5E.RestS" }}</a>
-                        <a class="rest long-rest" title="{{localize 'DND5E.LongRest'}}">{{ localize "DND5E.RestL" }}</a>
-                    </footer>
-                </li>
+    <div id="leftAdContainer">
 
-                <li class="attribute armor">
-                    <h4 class="attribute-name box-title">
-                        {{ localize "DND5E.ArmorClass" }}
-                        <a class="config-button" data-action="armor" title="{{localize 'DND5E.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
-                    </h4>
-                    <div class="attribute-value attributable" data-property="attributes.ac">
-                        <span>{{data.attributes.ac.value}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <span class="spell-dc">{{localize "DND5E.SpellDC"}} {{data.attributes.spelldc}}</span>
-                    </footer>
-                </li>
+    	<style>
+		.responsive-skyscraper { width: 120px; height: 600px; }
+		@media(min-width: 1280px) { .responsive-skyscraper { width: 120px; height: 600px; } }
+		@media(min-width: 1360px) { .responsive-skyscraper { width: 160px; height: 600px; } }
+		@media(min-width: 1510px) { .responsive-skyscraper { width: 160px; height: 600px; } }
+		</style>
+		<!-- Responsive Skyscraper -->
+		<ins class="responsive-skyscraper" style="display:inline-block" data-ad-client="ca-pub-1634190930768892" data-ad-slot="8837602817"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
 
-                <li class="attribute movement">
-                    <h4 class="attribute-name box-title">
-                        {{ localize "DND5E.Movement" }}
-                        <a class="config-button" data-action="movement" title="{{localize 'DND5E.MovementConfig'}}"><i class="fas fa-cog"></i></a>
-                    </h4>
-                    <div class="attribute-value">
-                        <span>{{movement.primary}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <span>{{movement.special}}</span>
-                    </footer>
-                </li>
+    </div>
 
-                <li class="attribute initiative">
-                    <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "DND5E.Initiative" }}</h4>
-                    <div class="attribute-value">
-                        <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <span>{{ localize "DND5E.Modifier" }}</span>
-                        <input name="data.attributes.init.value" type="text" data-dtype="Number" placeholder="0"
-                               value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
-                    </footer>
-                </li>
-            </ul>
-        </section>
-    </header>
+	<div id="sheetcontainer" class="container" style="position: relative; z-index: 10;">
+	<form id="sheet" class="form-horizontal" method="post"><div class="page">
 
-    {{!-- Character Sheet Navigation --}}
-    <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
-        <a class="item" data-tab="inventory">{{ localize "DND5E.Inventory" }}</a>
-        <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
-        <a class="item" data-tab="spellbook">{{ localize "DND5E.Spellbook" }}</a>
-        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
-        <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
-    </nav>
+	  <!--
+		table#info contains all the general information on the
+		character that's found at the top of the character sheet.
+	  -->
+	  
 
-    {{!-- Character Sheet Body --}}
-    <section class="sheet-body">
+	  <table id="info" cellspacing="0">
+		<tbody><tr>
+		  <td colspan="2"><input type="text" name="Name" title="Name"><br>Character Name</td>
+		  <td colspan="2"><input type="text" name="Player" title="Player"><br>Player</td>
+		  <td><input type="text" name="Alignment" title="Alignment"><br>Alignment</td>
+		  <td><input type="text" name="XPCurrent" title="XPCurrent"><br>Current XP</td>
+		  <td><input type="text" name="XPNext" title="XPNext"><br>Next Level XP</td>
+		  <td><input type="text" name="XPChange" title="XPChange"><br>XP Change</td>
+		</tr>
+		<tr>
+		  <td colspan="2"><input type="text" name="Class" title="Class"><br>Class</td>
+		  <td colspan="2"><input type="text" name="Race" title="Race"><br>Race</td>
+		  <td colspan="2"><input type="text" name="Campaign" title="Campaign"><br>Campaign</td>
+		  <td colspan="2"><input type="text" name="Deity" title="Deity"><br>Deity</td>
+		</tr>
+		<tr>
+		  <td class="unit"><input type="text" name="Level" title="Level"><br>Level</td>
+		  <td class="unit"><input type="text" name="Size" title="Size"><br>Size</td>
+		  <td class="unit"><input type="text" name="Age" title="Age"><br>Age</td>
+		  <td class="unit"><input type="text" name="Gender" title="Gender"><br>Gender</td>
+		  <td class="unit"><input type="text" name="Height" title="Height"><br>Height</td>
+		  <td class="unit"><input type="text" name="Weight" title="Weight"><br>Weight</td>
+		  <td class="unit"><input type="text" name="Eyes" title="Eyes"><br>Eyes</td>
+		  <td class="unit"><input type="text" name="Hair" title="Hair"><br>Hair</td>
+		</tr>
+	  </tbody></table>
 
-        <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+	  <!--
+		table#stats contains the statblock, saves, the picture...
+		The layout is 3 columns, 3 rows.
 
-            {{!-- Ability Scores --}}
-            <ul class="ability-scores flexrow">
-            {{#each data.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
-                    <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                    <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
-                    <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" title="{{ localize 'DND5E.Modifier' }}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.baseProf}}" data-dtype="Number"/>
-                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
-                        <span class="ability-save" title="{{ localize 'DND5E.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
-                    </div>
-                    <a class="config-button" data-action="ability" title="{{localize 'DND5E.AbilityConfigure'}}"><i class="fas fa-cog"></i></a>
-                </li>
-            {{/each}}
-            </ul>
+		*************************  1: Ability scores (rowspan=2)
+		*       *               *  2: AC, HP (colspan=2)
+		*       *       2       *  3: Initiative, speed, armor type
+		*       *               *  4: Image, load (rowspan=2)
+		*   1   *****************  5: Saves (colspan=2)
+		*       *       *       *
+		*       *   3   *       *
+		*       *       *       *
+		*****************   4   *
+		*               *       *
+		*       5       *       *
+		*               *       *
+		*************************
+	  -->
 
-            {{!-- Skills --}}
-            <ul class="skills-list">
-            {{#each config.skills as |label s|}}
-            {{#with (lookup ../data.skills s) as |skill|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
-                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.baseValue}}" data-dtype="Number"/>
-                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
-                    <div class="skill-name-controls">
-                      <h4 class="skill-name rollable">{{label}}</h4>
-                      <a class="config-button" data-action="skill" title="{{localize 'DND5E.SkillConfigure'}}"><i class="fas fa-cog"></i></a>
-                    </div>
-                    <span class="skill-ability">{{skill.ability}}</span>
-                    <span class="skill-mod" title="{{ localize 'DND5E.SkillModifierHint' skill=label }}">{{numberFormat skill.total decimals=0 sign=true}}</span>
-                    <span class="skill-passive" title="{{ localize 'DND5E.SkillPassiveHint' skill=label }}">({{skill.passive}})</span>
-                </li>
-            {{/with}}
-            {{/each}}
-            </ul>
+	  <table id="stats" cellspacing="0">
+		<tbody><tr>
+		  <td rowspan="2" class="unit top">
+			
+			<table id="statblock">
+			  <tbody><tr>
+				<td class="header">Ability</td>
+				<td class="header">Score</td>
+				<td class="header">Mod</td>
+				<td class="header">Temp<br>Score</td>
+				<td class="header">Temp<br>Mod</td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Strength" class="help">STR</span></td>
+				<td><input type="text" name="Str" title="Str" class="mod"></td>
+				<td><input type="text" name="StrMod" title="StrMod" class="mod"></td>
+				<td><input type="text" name="StrTemp" title="StrTemp" class="tempmod"></td>
+				<td><input type="text" name="StrTempMod" title="StrTempMod" class="tempmod"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Dexterity" class="help">DEX</span></td>
+				<td><input type="text" name="Dex" title="Dex" class="mod"></td>
+				<td><input type="text" name="DexMod" title="DexMod" class="mod"></td>
+				<td><input type="text" name="DexTemp" title="DexTemp" class="tempmod"></td>
+				<td><input type="text" name="DexTempMod" title="DexTempMod" class="tempmod"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Constitution" class="help">CON</span></td>
+				<td><input type="text" name="Con" title="Con" class="mod"></td>
+				<td><input type="text" name="ConMod" title="ConMod" class="mod"></td>
+				<td><input type="text" name="ConTemp" title="ConTemp" class="tempmod"></td>
+				<td><input type="text" name="ConTempMod" title="ConTempMod" class="tempmod"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Intelligence" class="help">INT</span></td>
+				<td><input type="text" name="Int" title="Int" class="mod"></td>
+				<td><input type="text" name="IntMod" title="IntMod" class="mod"></td>
+				<td><input type="text" name="IntTemp" title="IntTemp" class="tempmod"></td>
+				<td><input type="text" name="IntTempMod" title="IntTempMod" class="tempmod"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Wisdom" class="help">WIS</span></td>
+				<td><input type="text" name="Wis" title="Wis" class="mod"></td>
+				<td><input type="text" name="WisMod" title="WisMod" class="mod"></td>
+				<td><input type="text" name="WisTemp" title="WisTemp" class="tempmod"></td>
+				<td><input type="text" name="WisTempMod" title="WisTempMod" class="tempmod"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Charisma" class="help">CHA</span></td>
+				<td><input type="text" name="Cha" title="Cha" class="mod"></td>
+				<td><input type="text" name="ChaMod" title="ChaMod" class="mod"></td>
+				<td><input type="text" name="ChaTemp" title="ChaTemp" class="tempmod"></td>
+				<td><input type="text" name="ChaTempMod" title="ChaTempMod" class="tempmod"></td>
+			  </tr>
+			</tbody></table>
+			
+			<table id="init"> <!-- This is Action Points -->
+				<tbody><tr>
+					<td class="tag">Action Points</td>
+					<td class="unit"><input type="text" name="ActionPoints" title="ActionPoints"></td>
+				</tr>
+			</tbody></table>
+			
+		  </td>
+		  <td colspan="2" class="top">
+			
+			<table id="hp">
+			  <tbody><tr>
+				<td></td>
+				<td class="header"><br>TOTAL</td>
+				<td></td>
+				<td class="header" colspan="3">Current HP</td>
+				<td></td>
+				<td class="header" colspan="3">Nonlethal Damage</td>
+				<td></td>
+				<td class="header" colspan="3">Hit Dice</td>
+				<td></td>
+				<td class="header" colspan="3"><span title="Damage Reduction" class="help">Damage Reduction</span></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Hit Points" class="help">HP</span></td>
+				<td><input type="text" name="HP" title="HP"></td>
+				<td></td>
+				<td colspan="3"><input type="text" name="HPWounds" title="HPWounds"></td>
+				<td></td>
+				<td colspan="3"><input type="text" name="HPSub" title="HPSub"></td>
+				<td></td>
+				<td colspan="3"><input type="text" name="HPHD" title="HPHD"></td>
+				<td></td>
+				<td colspan="3"><input type="text" name="DamageRed" title="DamageRed"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span title="Armor Class" class="help">AC</span></td>
+				<td class="unit"><input type="text" name="AC" title="AC"></td>
+				<td class="char">=</td>
+				<td class="basenum"><span>10</span></td>
+				<td class="char">+</td>
+				<td class="unit"><input type="text" name="ACArmor" title="ACArmor"></td>
+				<td class="char">+</td>
+				<td class="unit"><input type="text" name="ACShield" title="ACShield"></td>
+				<td class="char">+</td>
+				<td class="unit"><input type="text" name="ACDex" title="ACDex"></td>
+				<td class="char">+</td>
+				<td class="unit"><input type="text" name="ACSize" title="ACSize"></td>
+				<td class="char">+</td>
+				<td class="unit"><input type="text" name="ACNat" title="ACNat"></td>
+				<td class="char">+</td>
+				<td class="unit"><input type="text" name="ACDeflect" title="ACDeflect"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td class="unit"><input type="text" name="ACMisc" title="ACMisc"></td>
+			  </tr>
+			  <tr>
+				<td></td>
+				<td class="footer">TOTAL</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td class="footer">Armor</td>
+				<td></td>
+				<td class="footer">Shield</td>
+				<td></td>
+				<td class="footer">Dex</td>
+				<td></td>
+				<td class="footer">Size</td>
+				<td></td>
+				<td class="footer">Natural</td>
+				<td></td>
+				<td class="footer">Deflect</td>
+				<td></td>
+				<td class="footer">Misc</td>
+			  </tr>
+			</tbody></table>
 
-            <section class="center-pane flexcol">
+		  </td>
+		</tr>
+		<tr>
+		  <td class="unit top">
+		  
+			<table id="init"> <!-- This is Touch and Flat-footed AC -->
+				<tbody><tr>
+					<td class="tag">Touch</td>
+					<td class="unit"><input type="text" name="ACTouch" title="ACTouch"></td>
+					<td></td>
+					<td class="tag">Flat-footed</td>
+					<td class="unit"><input type="text" name="ACFlat" title="ACFlat"></td>
+				</tr>
+			</tbody></table>
+			
+			<table id="init">
+			  <tbody><tr>
+				<td></td>
+				<td class="header">Total</td>
+				<td></td>
+				<td class="header">Dex</td>
+				<td></td>
+				<td class="header">Misc</td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span class="help" title="Initiative">INIT</span></td>
+				<td class="unit"><input type="text" name="Init" title="Init"></td>
+				<td class="char">=</td>
+				<td class="unit"><input type="text" name="InitDex" title="InitDex"></td>
+				<td class="char">+</td>
+				<td class="unit"><input type="text" name="InitMisc" title="InitMisc"></td>
+			  </tr>
+			</tbody></table>
 
-                {{!-- Body Attributes --}}
-                <ul class="attributes flexrow">
-                    {{#each resources as |res|}}
-                    <li class="attribute resource">
-                        <h4 class="attribute-name box-title">
-                            <input name="data.resources.{{res.name}}.label" type="text" value="{{res.label}}"
-                                   placeholder="{{res.placeholder}}" />
-                        </h4>
-                        <div class="attribute-value">
-                            <label class="recharge checkbox flexcol">
-                                <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
-                            </label>
+			<table id="speed">
+			  <tbody><tr>
+				<td><input type="text" name="Speed" title="Speed"></td>
+				<td><input type="text" name="Armor" title="Armor"></td>
+			  </tr>
+			  <tr>
+				<td class="footer">Speed</td>
+				<td class="footer">Armor Type</td>
+			  </tr>
+			</tbody></table>
 
-                            <input name="data.resources.{{res.name}}.value" type="number" value="{{res.value}}" placeholder="0"/>
-                            <span class="sep"> / </span>
-                            <input name="data.resources.{{res.name}}.max" type="number" value="{{res.max}}" placeholder="0"/>
+		  </td>
+		  <td rowspan="2">
+		  
+			<table id="imgload">
+			  <tbody><tr>
+				<td rowspan="6" class="piccell">
+				  <img id="pic" title="Character Portrait - Click to Link Image (125x193px)" alt="Character Portrait - Click to Link Image (125x193px)" onclick="SetPic()">
+				</td>
+				<td class="loadtext title">Light<br>Load</td>
+				<td class="loadinputs"><input type="text" name="LightLoad" title="LightLoad"></td>
+			  </tr>
+			  <tr>
+				<td class="loadtext title">Med<br>Load</td>
+				<td><input type="text" name="MediumLoad" title="MediumLoad"></td>
+			  </tr>
+			  <tr>
+				<td class="loadtext title">Max<br>Load</td>
+				<td><input type="text" name="HeavyLoad" title="HeavyLoad"></td>
+			  </tr>
+			  <tr>
+				<td class="loadtext title">Over<br>Head</td>
+				<td><input type="text" name="LiftOverHead" title="LiftOverHead"></td>
+			  </tr>
+			  <tr>
+				<td class="loadtext title">Off<br>Ground</td>
+				<td><input type="text" name="LiftOffGround" title="LiftOffGround"></td>
+			  </tr>
+			  <tr>
+				<td class="loadtext title">Push/<br>Drag</td>
+				<td><input type="text" name="LiftPushDrag" title="LiftPushDrag"></td>
+			  </tr>
+			</tbody></table>
+		  
+		  </td>
+		</tr>
+		<tr>
+		  <td colspan="2">
+		  
+			<table id="saves">
+			  <tbody><tr>
+				<td class="header">Saving Throws</td>
+				<td></td>
+				<td class="header">Total</td>
+				<td></td>
+				<td class="header">Base</td>
+				<td></td>
+				<td class="header">Ability<br>Mod</td>
+				<td></td>
+				<td class="header">Magic<br>Mod</td>
+				<td></td>
+				<td class="header">Misc<br>Mod</td>
+				<td></td>
+				<td class="header">Temp<br>Mod</td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span class="help" title="Fortitude: Based on Constitution">FORTITUDE</span></td>
+				<td></td>
+				<td class="unit"><input type="text" name="Fort" title="Fort"></td>
+				<td class="char"><span class="dark">=</span></td>
+				<td class="unit"><input type="text" name="FortBase" title="FortBase"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td class="unit"><input type="text" name="FortAbility" title="FortAbility"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td class="unit"><input type="text" name="FortMagic" title="FortMagic"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td class="unit"><input type="text" name="FortMisc" title="FortMisc"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td class="unit"><input type="text" class="temp" name="FortTemp" title="FortTemp"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span class="help" title="Reflex: Based on Dexterity">REFLEX</span></td>
+				<td></td>
+				<td><input type="text" name="Reflex" title="Reflex"></td>
+				<td class="char"><span class="dark">=</span></td>
+				<td><input type="text" name="ReflexBase" title="ReflexBase"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" name="ReflexAbility" title="ReflexAbility"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" name="ReflexMagic" title="ReflexMagic"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" name="ReflexMisc" title="ReflexMisc"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" class="temp" name="ReflexTemp" title="ReflexTemp"></td>
+			  </tr>
+			  <tr>
+				<td class="tag"><span class="big help" title="Will: Based on Wisdom">WILL</span></td>
+				<td></td>
+				<td><input type="text" name="Will" title="Will"></td>
+				<td class="char"><span class="dark">=</span></td>
+				<td><input type="text" name="WillBase" title="WillBase"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" name="WillAbility" title="WillAbility"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" name="WillMagic" title="WillMagic"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" name="WillMisc" title="WillMisc"></td>
+				<td class="char"><span class="dark">+</span></td>
+				<td><input type="text" class="temp" name="WillTemp" title="WillTemp"></td>
+			  </tr>
+			</tbody></table>
 
-                            <label class="recharge checkbox flexcol">
-                                <span>{{ localize "DND5E.AbbreviationLR" }}</span><input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
-                            </label>
-                        </div>
-                    </li>
-                    {{/each}}
-                </ul>
+		  </td>
+		</tr>
+	  </tbody></table>
 
-                {{!-- Counters --}}
-                <div class="counters">
-                    <div class="counter flexrow death-saves">
-                        <h4 class="rollable" data-action="rollDeathSave">{{ localize "DND5E.DeathSave" }}</h4>
-                        <div class="counter-value">
-                            <i class="fas fa-check"></i>
-                            <input name="data.attributes.death.success" type="number" placeholder="0"
-                                   value="{{data.attributes.death.success}}">
-                            <i class="fas fa-times"></i>
-                            <input name="data.attributes.death.failure" type="number" placeholder="0"
-                                   value="{{data.attributes.death.failure}}">
-                        </div>
-                    </div>
-                    <div class="counter flexrow exhaustion">
-                        <h4>{{ localize "DND5E.Exhaustion" }}</h4>
-                        <div class="counter-value">
-                            <input name="data.attributes.exhaustion" type="number" placeholder="0"
-                                   value="{{data.attributes.exhaustion}}" />
-                        </div>
-                    </div>
-                    <div class="counter flexrow inspiration">
-                        <h4>{{ localize "DND5E.Inspiration" }}</h4>
-                        <div class="counter-value">
-                            <input type="checkbox" name="data.attributes.inspiration" data-dtype="Boolean"
-                                   {{checked data.attributes.inspiration}}/>
-                        </div>
-                    </div>
-                </div>
+	  <!--
+		table#attacks contains the base melee and ranged attack bonuses.
+	  -->
 
-                {{!-- Traits --}}
-                {{> "systems/dnd5e/templates/actors/parts/actor-traits.html"}}
-            </section>
-        </div>
+	  <table id="attacks">
+		<tbody><tr>
+		  <td></td>
+		  <td class="header">Total Attack Bonus</td>
+		  <td></td>
+		  <td class="header">Base Attack Bonus</td>
+		  <td></td>
+		  <td class="header">Str Mod</td>
+		  <td></td>
+		  <td class="header">Size Mod</td>
+		  <td></td>
+		  <td class="header">Misc Mod</td>
+		  <td></td>
+		  <td class="header">Temp Mod</td>
+		</tr>
+		<tr>
+		  <td class="tag"><span class="help" title="Melee Attack Bonus">MELEE</span></td>
+		  <td class="wide"><input type="text" name="MBAB" title="MBAB"></td>
+		  <td class="char">=</td>
+		  <td class="wide"><input type="text" name="MABBase" title="MABBase"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" name="MABStr" title="MABStr"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" name="MABSize" title="MABSize"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" name="MABMisc" title="MABMisc"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" class="temp" name="MABTemp" title="MABTemp"></td>
+		</tr>
+                <tr>
+                  <td class="tag"><span class="help" title="Grapple Attack Bonus">GRAPPLE</span></td>
+                  <td class="wide"><input type="text" name="GBAB" title="MGBAB"></td>
+                  <td class="char">=</td>
+                  <td class="wide"><input type="text" name="GABBase" title="GABBase"></td>
+                  <td class="char">+</td>
+                  <td class="unit"><input type="text" name="GABStr" title="GABStr"></td>
+                  <td class="char">+</td>
+                  <td class="unit"><input type="text" name="GABSize" title="GABSize"></td>
+                  <td class="char">+</td>
+                  <td class="unit"><input type="text" name="GABMisc" title="GABMisc"></td>
+                  <td class="char">+</td>
+                  <td class="unit"><input type="text" class="temp" name="GABTemp" title="GABTemp"></td>
+                </tr>
+		<tr>
+		  <td class="tag"><span class="help" title="Ranged Attack Bonus">RANGED</span></td>
+		  <td class="wide"><input type="text" name="RBAB" title="RBAB"></td>
+		  <td class="char">=</td>
+		  <td class="wide"><input type="text" name="RABBase" title="RABBase"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" name="RABDex" title="RABDex"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" name="RABSize" title="RABSize"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" name="RABMisc" title="RABMisc"></td>
+		  <td class="char">+</td>
+		  <td class="unit"><input type="text" class="temp" name="RABTemp" title="RABTemp"></td>
+		</tr>
+		<tr>
+		  <td></td>
+		  <td class="footer">Total Attack Bonus</td>
+		  <td></td>
+		  <td class="footer">Base Attack Bonus</td>
+		  <td></td>
+		  <td class="footer">Dex Mod</td>
+		  <td></td>
+		  <td class="footer">Size Mod</td>
+		  <td></td>
+		  <td class="footer">Misc Mod</td>
+		  <td></td>
+		  <td class="footer">Temp Mod</td>
+		</tr>
+	  </tbody></table>
+	  
+	  <!--
+		table.weapon are weapon slots.
+	  -->
 
-        {{!-- Inventory Tab --}}
-        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "systems/dnd5e/templates/actors/parts/actor-inventory.html" sections=inventory}}
-        </div>
+	  <table class="weapon" cellspacing="0">
+		<tbody><tr class="header">
+		  <td class="type wide">Weapon</td>
+		  <td class="wide">Total Attack Bonus</td>
+		  <td class="medium">Damage</td>
+		  <td class="small">Critical</td>
+		  <td class="small">Range</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon1" title="Weapon1"></td>
+		  <td><input name="Weapon1AB" title="Weapon1AB"></td>
+		  <td><input name="Weapon1Damage" title="Weapon1Damage"></td>
+		  <td><input name="Weapon1Crit" title="Weapon1Crit"></td>
+		  <td><input name="Weapon1Range" title="Weapon1Range"></td>
+		</tr>
+		<tr class="header">
+		  <td>Special Properties</td>
+		  <td>Ammunition</td>
+		  <td>Weight</td>
+		  <td>Size</td>
+		  <td>Type</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon1Special" title="Weapon1Special"></td>
+		  <td><input name="Weapon1Ammo" title="Weapon1Ammo"></td>
+		  <td><input name="Weapon1Weight" title="Weapon1Weight"></td>
+		  <td><input name="Weapon1Size" title="Weapon1Size"></td>
+		  <td><input name="Weapon1Type" title="Weapon1Type"></td>
+		</tr>
+	  </tbody></table>
 
-        {{!-- Features Tab --}}
-        <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/dnd5e/templates/actors/parts/actor-features.html" sections=features}}
-        </div>
+	  <table class="weapon" cellspacing="0">
+		<tbody><tr class="header">
+		  <td class="type wide">Weapon</td>
+		  <td class="wide">Total Attack Bonus</td>
+		  <td class="medium">Damage</td>
+		  <td class="small">Critical</td>
+		  <td class="small">Range</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon2" title="Weapon2"></td>
+		  <td><input name="Weapon2AB" title="Weapon2AB"></td>
+		  <td><input name="Weapon2Damage" title="Weapon2Damage"></td>
+		  <td><input name="Weapon2Crit" title="Weapon2Crit"></td>
+		  <td><input name="Weapon2Range" title="Weapon2Range"></td>
+		</tr>
+		<tr class="header">
+		  <td>Special Properties</td>
+		  <td>Ammunition</td>
+		  <td>Weight</td>
+		  <td>Size</td>
+		  <td>Type</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon2Special" title="Weapon2Special"></td>
+		  <td><input name="Weapon2Ammo" title="Weapon2Ammo"></td>
+		  <td><input name="Weapon2Weight" title="Weapon2Weight"></td>
+		  <td><input name="Weapon2Size" title="Weapon2Size"></td>
+		  <td><input name="Weapon2Type" title="Weapon2Type"></td>
+		</tr>
+	  </tbody></table>
 
-        {{!-- Spellbook Tab --}}
-        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "systems/dnd5e/templates/actors/parts/actor-spellbook.html"}}
-        </div>
+	  <table class="weapon" cellspacing="0">
+		<tbody><tr class="header">
+		  <td class="type wide">Weapon</td>
+		  <td class="wide">Total Attack Bonus</td>
+		  <td class="medium">Damage</td>
+		  <td class="small">Critical</td>
+		  <td class="small">Range</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon3" title="Weapon3"></td>
+		  <td><input name="Weapon3AB" title="Weapon3AB"></td>
+		  <td><input name="Weapon3Damage" title="Weapon3Damage"></td>
+		  <td><input name="Weapon3Crit" title="Weapon3Crit"></td>
+		  <td><input name="Weapon3Range" title="Weapon3Range"></td>
+		</tr>
+		<tr class="header">
+		  <td>Special Properties</td>
+		  <td>Ammunition</td>
+		  <td>Weight</td>
+		  <td>Size</td>
+		  <td>Type</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon3Special" title="Weapon3Special"></td>
+		  <td><input name="Weapon3Ammo" title="Weapon3Ammo"></td>
+		  <td><input name="Weapon3Weight" title="Weapon3Weight"></td>
+		  <td><input name="Weapon3Size" title="Weapon3Size"></td>
+		  <td><input name="Weapon3Type" title="Weapon3Type"></td>
+		</tr>
+	  </tbody></table>
+	  
+	  <table class="weapon" cellspacing="0">
+		<tbody><tr class="header">
+		  <td class="type wide">Weapon</td>
+		  <td class="wide">Total Attack Bonus</td>
+		  <td class="medium">Damage</td>
+		  <td class="small">Critical</td>
+		  <td class="small">Range</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon4" title="Weapon4"></td>
+		  <td><input name="Weapon4AB" title="Weapon4AB"></td>
+		  <td><input name="Weapon4Damage" title="Weapon4Damage"></td>
+		  <td><input name="Weapon4Crit" title="Weapon4Crit"></td>
+		  <td><input name="Weapon4Range" title="Weapon4Range"></td>
+		</tr>
+		<tr class="header">
+		  <td>Special Properties</td>
+		  <td>Ammunition</td>
+		  <td>Weight</td>
+		  <td>Size</td>
+		  <td>Type</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="Weapon4Special" title="Weapon4Special"></td>
+		  <td><input name="Weapon4Ammo" title="Weapon4Ammo"></td>
+		  <td><input name="Weapon4Weight" title="Weapon4Weight"></td>
+		  <td><input name="Weapon4Size" title="Weapon4Size"></td>
+		  <td><input name="Weapon4Type" title="Weapon4Type"></td>
+		</tr>
+	  </tbody></table>
+	  
+	  <!--
+		table.armor are armor slots.
+	  -->
 
-        {{!-- Effects Tab --}}
-        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/dnd5e/templates/actors/parts/active-effects.html"}}
-        </div>
+	  <table class="armor" cellspacing="0">
+		<tbody><tr class="header">
+		  <td class="type wide">Armor/Protective Item</td>
+		  <td class="small">Type</td>
+		  <td class="small">AC Bonus</td>
+		  <td class="small">Check Pen</td>
+		  <td class="small">Max Dex</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="ArmorName" title="ArmorName"></td>
+		  <td><input name="ArmorType" title="ArmorType"></td>
+		  <td><input name="ArmorBonus" title="ArmorBonus"></td>
+		  <td><input name="ArmorCheck" title="ArmorCheck"></td>
+		  <td><input name="ArmorDex" title="ArmorDex"></td>
+		</tr>
+		<tr class="header">
+		  <td colspan="2">Special Properties</td>
+		  <td>Weight</td>
+		  <td>Spell Fail</td>
+		  <td>Speed</td>
+		</tr>
+		<tr>
+		  <td colspan="2"><input class="left" name="ArmorSpecial" title="ArmorSpecial"></td>
+		  <td><input name="ArmorWeight" title="ArmorWeight"></td>
+		  <td><input name="ArmorSpell" title="ArmorSpell"></td>
+		  <td><input name="ArmorSpeed" title="ArmorSpeed"></td>
+		</tr>
+	  </tbody></table>
 
-        {{!-- Biography Tab --}}
-        <div class="tab flexrow" data-group="primary" data-tab="biography">
-            <div class="characteristics flexcol">
-                <label>{{ localize "DND5E.Appearance" }}</label>
-                <textarea name="data.details.appearance">{{data.details.appearance}}</textarea>
-                <label>{{ localize "DND5E.PersonalityTraits" }}</label>
-                <textarea name="data.details.trait">{{data.details.trait}}</textarea>
-                <label>{{ localize "DND5E.Ideals" }}</label>
-                <textarea name="data.details.ideal">{{data.details.ideal}}</textarea>
-                <label>{{ localize "DND5E.Bonds" }}</label>
-                <textarea name="data.details.bond">{{data.details.bond}}</textarea>
-                <label>{{ localize "DND5E.Flaws" }}</label>
-                <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>
-            </div>
-            <div class="biography">
-                {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rollData=rollData}}
-            </div>
-        </div>
-    </section>
+	  <table class="armor" cellspacing="0">
+		<tbody><tr class="header">
+		  <td class="type wide">Shield/Protective Item</td>
+		  <td class="small">Type</td>
+		  <td class="small">AC Bonus</td>
+		  <td class="small">Check Pen</td>
+		  <td class="small">Max Dex</td>
+		</tr>
+		<tr>
+		  <td><input class="left" name="ShieldName" title="ShieldName"></td>
+		  <td><input name="ShieldType" title="ShieldType"></td>
+		  <td><input name="ShieldBonus" title="ShieldBonus"></td>
+		  <td><input name="ShieldCheck" title="ShieldCheck"></td>
+		  <td><input name="ShieldDex" title="ShieldDex"></td>
+		</tr>
+		<tr class="header">
+		  <td colspan="2">Special Properties</td>
+		  <td>Weight</td>
+		  <td>Spell Fail</td>
+		  <td>Speed</td>
+		</tr>
+		<tr>
+		  <td colspan="2"><input class="left" name="ShieldSpecial" title="ShieldSpecial"></td>
+		  <td><input name="ShieldWeight" title="ShieldWeight"></td>
+		  <td><input name="ShieldSpell" title="ShieldSpell"></td>
+		  <td><input name="ShieldSpeed" title="ShieldSpeed"></td>
+		</tr>
+	  </tbody></table>
+
+
+			<!--
+			  table#feats is the feats table.
+			-->
+			<table id="feats">
+			  <tbody><tr class="title">
+				<td colspan="4">Feats &amp; Special Abilities</td>
+			  </tr>
+			  <tr>
+				<td>
+				  
+				  <!--
+					Keep each column in a table to enforce a vertical tab order.
+					It's easier to do this rather than specify the tab order of
+					each of the thousand or so inputs.
+				  -->
+
+				  <table cellspacing="0">
+							<tbody><tr><td><input type="text" name="Feat01" title="Feat01"></td></tr>
+							<tr><td><input type="text" name="Feat02" title="Feat02"></td></tr>
+							<tr><td><input type="text" name="Feat03" title="Feat03"></td></tr>
+							<tr><td><input type="text" name="Feat04" title="Feat04"></td></tr>
+							<tr><td><input type="text" name="Feat05" title="Feat05"></td></tr>
+							<tr><td><input type="text" name="Feat06" title="Feat06"></td></tr>
+							<tr><td><input type="text" name="Feat07" title="Feat07"></td></tr>
+							<tr><td><input type="text" name="Feat08" title="Feat08"></td></tr>
+							<tr><td><input type="text" name="Feat09" title="Feat09"></td></tr>
+							<tr><td><input type="text" name="Feat10" title="Feat10"></td></tr>
+							<tr><td><input type="text" name="Feat11" title="Feat11"></td></tr>
+							<tr><td><input type="text" name="Feat12" title="Feat12"></td></tr>
+							<tr><td><input type="text" name="Feat13" title="Feat13"></td></tr>
+							<tr><td><input type="text" name="Feat14" title="Feat14"></td></tr>
+							<tr><td><input type="text" name="Feat15" title="Feat15"></td></tr>
+							<tr><td><input type="text" name="Feat16" title="Feat16"></td></tr>
+							<tr><td><input type="text" name="Feat17" title="Feat17"></td></tr>
+							<tr><td><input type="text" name="Feat18" title="Feat18"></td></tr>
+						  </tbody></table>
+
+				</td>
+				<td>
+				  
+				  <table cellspacing="0">
+							<tbody><tr><td><input type="text" name="Feat19" title="Feat19"></td></tr>
+							<tr><td><input type="text" name="Feat20" title="Feat20"></td></tr>
+							<tr><td><input type="text" name="Feat21" title="Feat21"></td></tr>
+							<tr><td><input type="text" name="Feat22" title="Feat22"></td></tr>
+							<tr><td><input type="text" name="Feat23" title="Feat23"></td></tr>
+							<tr><td><input type="text" name="Feat24" title="Feat24"></td></tr>
+							<tr><td><input type="text" name="Feat25" title="Feat25"></td></tr>
+							<tr><td><input type="text" name="Feat26" title="Feat26"></td></tr>
+							<tr><td><input type="text" name="Feat27" title="Feat27"></td></tr>
+							<tr><td><input type="text" name="Feat28" title="Feat28"></td></tr>
+							<tr><td><input type="text" name="Feat29" title="Feat29"></td></tr>
+							<tr><td><input type="text" name="Feat30" title="Feat30"></td></tr>
+							<tr><td><input type="text" name="Feat31" title="Feat31"></td></tr>
+							<tr><td><input type="text" name="Feat32" title="Feat32"></td></tr>
+							<tr><td><input type="text" name="Feat33" title="Feat33"></td></tr>
+							<tr><td><input type="text" name="Feat34" title="Feat34"></td></tr>
+							<tr><td><input type="text" name="Feat35" title="Feat35"></td></tr>
+							<tr><td><input type="text" name="Feat36" title="Feat36"></td></tr>
+	
+				  </tbody></table>
+				
+				</td>
+				<td>
+				  
+				  <table cellspacing="0">
+							<tbody><tr><td><input type="text" name="Feat37" title="Feat37"></td></tr>
+							<tr><td><input type="text" name="Feat38" title="Feat38"></td></tr>
+							<tr><td><input type="text" name="Feat39" title="Feat39"></td></tr>
+							<tr><td><input type="text" name="Feat40" title="Feat40"></td></tr>
+							<tr><td><input type="text" name="Feat41" title="Feat41"></td></tr>
+							<tr><td><input type="text" name="Feat42" title="Feat42"></td></tr>
+							<tr><td><input type="text" name="Feat43" title="Feat43"></td></tr>
+							<tr><td><input type="text" name="Feat44" title="Feat44"></td></tr>
+							<tr><td><input type="text" name="Feat45" title="Feat45"></td></tr>
+							<tr><td><input type="text" name="Feat46" title="Feat46"></td></tr>
+							<tr><td><input type="text" name="Feat47" title="Feat47"></td></tr>
+							<tr><td><input type="text" name="Feat48" title="Feat48"></td></tr>
+							<tr><td><input type="text" name="Feat49" title="Feat49"></td></tr>
+							<tr><td><input type="text" name="Feat50" title="Feat50"></td></tr>
+							<tr><td><input type="text" name="Feat51" title="Feat51"></td></tr>
+							<tr><td><input type="text" name="Feat52" title="Feat52"></td></tr>
+							<tr><td><input type="text" name="Feat53" title="Feat53"></td></tr>
+							<tr><td><input type="text" name="Feat54" title="Feat54"></td></tr>
+	
+				  </tbody></table>
+				
+				</td>
+				<td>
+				  
+				  <table cellspacing="0">
+							<tbody><tr><td><input type="text" name="Feat55" title="Feat55"></td></tr>
+							<tr><td><input type="text" name="Feat56" title="Feat56"></td></tr>
+							<tr><td><input type="text" name="Feat57" title="Feat57"></td></tr>
+							<tr><td><input type="text" name="Feat58" title="Feat58"></td></tr>
+							<tr><td><input type="text" name="Feat59" title="Feat59"></td></tr>
+							<tr><td><input type="text" name="Feat60" title="Feat60"></td></tr>
+							<tr><td><input type="text" name="Feat61" title="Feat61"></td></tr>
+							<tr><td><input type="text" name="Feat62" title="Feat62"></td></tr>
+							<tr><td><input type="text" name="Feat63" title="Feat63"></td></tr>
+							<tr><td><input type="text" name="Feat64" title="Feat64"></td></tr>
+							<tr><td><input type="text" name="Feat65" title="Feat65"></td></tr>
+							<tr><td><input type="text" name="Feat66" title="Feat66"></td></tr>
+							<tr><td><input type="text" name="Feat67" title="Feat67"></td></tr>
+							<tr><td><input type="text" name="Feat68" title="Feat68"></td></tr>
+							<tr><td><input type="text" name="Feat69" title="Feat69"></td></tr>
+							<tr><td><input type="text" name="Feat70" title="Feat70"></td></tr>
+							<tr><td><input type="text" name="Feat71" title="Feat71"></td></tr>
+							<tr><td><input type="text" name="Feat72" title="Feat72"></td></tr>
+	
+				  </tbody></table>
+				
+				</td>
+
+			  </tr>
+			</tbody></table>
+	  
+</div>
+<div class="page">
+	  <!--
+		table#skillsandgear holds both the skills and gear tables
+	  -->
+
+	  <table id="skillsandgear">
+		<tbody><tr>
+		  <td id="skillcontainer">
+
+			<table id="skills" cellspacing="0" cellpadding="0">
+			  <tbody><tr class="title">
+				<td colspan="11">
+				  <div id="skillranks">
+					<div>
+					  <input type="text" name="MaxRank" title="MaxRank">/<input type="text" name="MaxRankCC" title="MaxRankCC">
+					</div>
+					Max Rank
+				  </div>
+				  Skills
+				  <span id="skillcontext">
+										  [ <a id="skillsfill" title="Fill table with the core 3.5E skills.">Auto Fill</a> | <a id="skillscc" title="Determine which skills are class skills.">Update CC</a> | <a id="skillsclear" title="Clear the entire contents of this table.">Clear</a> ]
+										</span>
+				</td>
+			  </tr>
+          <tr class="header">
+            <td class="name" style="width:20em;"><a id="skillsort_Name" title="Sort by Skill Name">Skill Name</a></td>
+            <td><a id="skillsort_Ab" title="Sort by Key Ability">Key<br>Ab</a></td>
+            <td><a id="skillsort_CS" title="Sort by Class Skill">CS</a></td>
+            <td><a id="skillsort_Mod" title="Sort by Skill Modifier">Skill<br>Mod</a></td>
+            <td></td>
+            <td><a id="skillsort_AbMod" title="Sort by Ability Modifier">Ab<br>Mod</a></td>
+            <td></td>
+            <td><a id="skillsort_Rank" title="Sort by Rank">Rank</a></td>
+            <td></td>
+            <td style="width: 5em;"><a id="skillsort_MiscMod" title="Sort by Miscelaneous Modifier">Misc<br>Mod</a></td>
+            <td style="width: 3em;"><a id="skillsort_ACP" title="Armor Check Penalty">ACP</a></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill01" title="Skill01"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill01Ab" title="Skill01Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill01CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill01Mod" title="Skill01Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill01AbMod" title="Skill01AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill01Rank" title="Skill01Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill01MiscMod" title="Skill01MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill01ACP" title="Skill01ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill02" title="Skill02"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill02Ab" title="Skill02Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill02CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill02Mod" title="Skill02Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill02AbMod" title="Skill02AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill02Rank" title="Skill02Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill02MiscMod" title="Skill02MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill02ACP" title="Skill02ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill03" title="Skill03"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill03Ab" title="Skill03Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill03CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill03Mod" title="Skill03Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill03AbMod" title="Skill03AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill03Rank" title="Skill03Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill03MiscMod" title="Skill03MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill03ACP" title="Skill03ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill04" title="Skill04"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill04Ab" title="Skill04Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill04CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill04Mod" title="Skill04Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill04AbMod" title="Skill04AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill04Rank" title="Skill04Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill04MiscMod" title="Skill04MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill04ACP" title="Skill04ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill05" title="Skill05"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill05Ab" title="Skill05Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill05CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill05Mod" title="Skill05Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill05AbMod" title="Skill05AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill05Rank" title="Skill05Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill05MiscMod" title="Skill05MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill05ACP" title="Skill05ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill06" title="Skill06"></td>
+            <td class="unit"><input class="text" type="text" name="Skill06Ab" title="Skill06Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill06CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill06Mod" title="Skill06Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill06AbMod" title="Skill06AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill06Rank" title="Skill06Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill06MiscMod" title="Skill06MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill06ACP" title="Skill06ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill07" title="Skill07"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill07Ab" title="Skill07Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill07CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill07Mod" title="Skill07Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill07AbMod" title="Skill07AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill07Rank" title="Skill07Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill07MiscMod" title="Skill07MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill07ACP" title="Skill07ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill08" title="Skill08"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill08Ab" title="Skill08Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill08CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill08Mod" title="Skill08Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill08AbMod" title="Skill08AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill08Rank" title="Skill08Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill08MiscMod" title="Skill08MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill08ACP" title="Skill08ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill09" title="Skill09"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill09Ab" title="Skill09Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill09CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill09Mod" title="Skill09Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill09AbMod" title="Skill09AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill09Rank" title="Skill09Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill09MiscMod" title="Skill09MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill09ACP" title="Skill09ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill10" title="Skill10"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill10Ab" title="Skill10Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill10CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill10Mod" title="Skill10Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill10AbMod" title="Skill10AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill10Rank" title="Skill10Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill10MiscMod" title="Skill10MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill10ACP" title="Skill10ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill11" title="Skill11"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill11Ab" title="Skill11Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill11CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill11Mod" title="Skill11Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill11AbMod" title="Skill11AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill11Rank" title="Skill11Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill11MiscMod" title="Skill11MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill11ACP" title="Skill11ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill12" title="Skill12"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill12Ab" title="Skill12Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill12CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill12Mod" title="Skill12Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill12AbMod" title="Skill12AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill12Rank" title="Skill12Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill12MiscMod" title="Skill12MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill12ACP" title="Skill12ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill13" title="Skill13"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill13Ab" title="Skill13Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill13CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill13Mod" title="Skill13Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill13AbMod" title="Skill13AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill13Rank" title="Skill13Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill13MiscMod" title="Skill13MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill13ACP" title="Skill13ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill14" title="Skill14"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill14Ab" title="Skill14Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill14CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill14Mod" title="Skill14Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill14AbMod" title="Skill14AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill14Rank" title="Skill14Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill14MiscMod" title="Skill14MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill14ACP" title="Skill14ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill15" title="Skill15"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill15Ab" title="Skill15Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill15CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill15Mod" title="Skill15Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill15AbMod" title="Skill15AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill15Rank" title="Skill15Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill15MiscMod" title="Skill15MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill15ACP" title="Skill15ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill16" title="Skill16"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill16Ab" title="Skill16Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill16CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill16Mod" title="Skill16Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill16AbMod" title="Skill16AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill16Rank" title="Skill16Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill16MiscMod" title="Skill16MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill16ACP" title="Skill16ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill17" title="Skill17"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill17Ab" title="Skill17Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill17CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill17Mod" title="Skill17Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill17AbMod" title="Skill17AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill17Rank" title="Skill17Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill17MiscMod" title="Skill17MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill17ACP" title="Skill17ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill18" title="Skill18"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill18Ab" title="Skill18Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill18CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill18Mod" title="Skill18Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill18AbMod" title="Skill18AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill18Rank" title="Skill18Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill18MiscMod" title="Skill18MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill18ACP" title="Skill18ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill19" title="Skill19"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill19Ab" title="Skill19Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill19CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill19Mod" title="Skill19Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill19AbMod" title="Skill19AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill19Rank" title="Skill19Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill19MiscMod" title="Skill19MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill19ACP" title="Skill19ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill20" title="Skill20"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill20Ab" title="Skill20Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill20CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill20Mod" title="Skill20Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill20AbMod" title="Skill20AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill20Rank" title="Skill20Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill20MiscMod" title="Skill20MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill20ACP" title="Skill20ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill21" title="Skill21"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill21Ab" title="Skill21Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill21CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill21Mod" title="Skill21Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill21AbMod" title="Skill21AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill21Rank" title="Skill21Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill21MiscMod" title="Skill21MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill21ACP" title="Skill21ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill22" title="Skill22"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill22Ab" title="Skill22Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill22CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill22Mod" title="Skill22Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill22AbMod" title="Skill22AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill22Rank" title="Skill22Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill22MiscMod" title="Skill22MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill22ACP" title="Skill22ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill23" title="Skill23"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill23Ab" title="Skill23Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill23CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill23Mod" title="Skill23Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill23AbMod" title="Skill23AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill23Rank" title="Skill23Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill23MiscMod" title="Skill23MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill23ACP" title="Skill23ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill24" title="Skill24"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill24Ab" title="Skill24Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill24CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill24Mod" title="Skill24Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill24AbMod" title="Skill24AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill24Rank" title="Skill24Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill24MiscMod" title="Skill24MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill24ACP" title="Skill24ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill25" title="Skill25"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill25Ab" title="Skill25Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill25CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill25Mod" title="Skill25Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill25AbMod" title="Skill25AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill25Rank" title="Skill25Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill25MiscMod" title="Skill25MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill25ACP" title="Skill25ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill26" title="Skill26"></td>
+            <td class="unit"><input class="text" type="text" name="Skill26Ab" title="Skill26Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill26CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill26Mod" title="Skill26Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill26AbMod" title="Skill26AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill26Rank" title="Skill26Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill26MiscMod" title="Skill26MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill26ACP" title="Skill26ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill27" title="Skill27"></td>
+            <td class="unit"><input class="text" type="text" name="Skill27Ab" title="Skill27Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill27CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill27Mod" title="Skill27Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill27AbMod" title="Skill27AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill27Rank" title="Skill27Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill27MiscMod" title="Skill27MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill27ACP" title="Skill27ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill28" title="Skill28"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill28Ab" title="Skill28Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill28CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill28Mod" title="Skill28Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill28AbMod" title="Skill28AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill28Rank" title="Skill28Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill28MiscMod" title="Skill28MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill28ACP" title="Skill28ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill29" title="Skill29"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill29Ab" title="Skill29Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill29CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill29Mod" title="Skill29Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill29AbMod" title="Skill29AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill29Rank" title="Skill29Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill29MiscMod" title="Skill29MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill29ACP" title="Skill29ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill30" title="Skill30"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill30Ab" title="Skill30Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill30CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill30Mod" title="Skill30Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill30AbMod" title="Skill30AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill30Rank" title="Skill30Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill30MiscMod" title="Skill30MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill30ACP" title="Skill30ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill31" title="Skill31"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill31Ab" title="Skill31Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill31CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill31Mod" title="Skill31Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill31AbMod" title="Skill31AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill31Rank" title="Skill31Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill31MiscMod" title="Skill31MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill31ACP" title="Skill31ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill32" title="Skill32"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill32Ab" title="Skill32Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill32CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill32Mod" title="Skill32Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill32AbMod" title="Skill32AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill32Rank" title="Skill32Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill32MiscMod" title="Skill32MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill32ACP" title="Skill32ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill33" title="Skill33"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill33Ab" title="Skill33Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill33CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill33Mod" title="Skill33Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill33AbMod" title="Skill33AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill33Rank" title="Skill33Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill33MiscMod" title="Skill33MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill33ACP" title="Skill33ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill34" title="Skill34"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill34Ab" title="Skill34Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill34CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill34Mod" title="Skill34Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill34AbMod" title="Skill34AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill34Rank" title="Skill34Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill34MiscMod" title="Skill34MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill34ACP" title="Skill34ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill35" title="Skill35"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill35Ab" title="Skill35Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill35CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill35Mod" title="Skill35Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill35AbMod" title="Skill35AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill35Rank" title="Skill35Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill35MiscMod" title="Skill35MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill35ACP" title="Skill35ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill36" title="Skill36"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill36Ab" title="Skill36Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill36CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill36Mod" title="Skill36Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill36AbMod" title="Skill36AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill36Rank" title="Skill36Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill36MiscMod" title="Skill36MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill36ACP" title="Skill36ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill37" title="Skill37"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill37Ab" title="Skill37Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill37CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill37Mod" title="Skill37Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill37AbMod" title="Skill37AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill37Rank" title="Skill37Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill37MiscMod" title="Skill37MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill37ACP" title="Skill37ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text unsaved" type="text" name="Skill38" title="Skill38"></td>
+            <td class="unit"><input class="text unsaved" type="text" name="Skill38Ab" title="Skill38Ab"></td>
+            <td class="char unsaved"><input class="chk unsaved" type="checkbox" name="Skill38CC"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill38Mod" title="Skill38Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill38AbMod" title="Skill38AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill38Rank" title="Skill38Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill38MiscMod" title="Skill38MiscMod"></td>
+            <td class="skillmod"><input class="text unsaved" type="text" name="Skill38ACP" title="Skill38ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill39" title="Skill39"></td>
+            <td class="unit"><input class="text" type="text" name="Skill39Ab" title="Skill39Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill39CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill39Mod" title="Skill39Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill39AbMod" title="Skill39AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill39Rank" title="Skill39Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill39MiscMod" title="Skill39MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill39ACP" title="Skill39ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill40" title="Skill40"></td>
+            <td class="unit"><input class="text" type="text" name="Skill40Ab" title="Skill40Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill40CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill40Mod" title="Skill40Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill40AbMod" title="Skill40AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill40Rank" title="Skill40Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill40MiscMod" title="Skill40MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill40ACP" title="Skill40ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill41" title="Skill41"></td>
+            <td class="unit"><input class="text" type="text" name="Skill41Ab" title="Skill41Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill41CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill41Mod" title="Skill41Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill41AbMod" title="Skill41AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill41Rank" title="Skill41Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill41MiscMod" title="Skill41MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill41ACP" title="Skill41ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill42" title="Skill42"></td>
+            <td class="unit"><input class="text" type="text" name="Skill42Ab" title="Skill42Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill42CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill42Mod" title="Skill42Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill42AbMod" title="Skill42AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill42Rank" title="Skill42Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill42MiscMod" title="Skill42MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill42ACP" title="Skill42ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill43" title="Skill43"></td>
+            <td class="unit"><input class="text" type="text" name="Skill43Ab" title="Skill43Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill43CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill43Mod" title="Skill43Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill43AbMod" title="Skill43AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill43Rank" title="Skill43Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill43MiscMod" title="Skill43MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill43ACP" title="Skill43ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill44" title="Skill44"></td>
+            <td class="unit"><input class="text" type="text" name="Skill44Ab" title="Skill44Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill44CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill44Mod" title="Skill44Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill44AbMod" title="Skill44AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill44Rank" title="Skill44Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill44MiscMod" title="Skill44MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill44ACP" title="Skill44ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill45" title="Skill45"></td>
+            <td class="unit"><input class="text" type="text" name="Skill45Ab" title="Skill45Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill45CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill45Mod" title="Skill45Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill45AbMod" title="Skill45AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill45Rank" title="Skill45Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill45MiscMod" title="Skill45MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill45ACP" title="Skill45ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill46" title="Skill46"></td>
+            <td class="unit"><input class="text" type="text" name="Skill46Ab" title="Skill46Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill46CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill46Mod" title="Skill46Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill46AbMod" title="Skill46AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill46Rank" title="Skill46Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill46MiscMod" title="Skill46MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill46ACP" title="Skill46ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill47" title="Skill47"></td>
+            <td class="unit"><input class="text" type="text" name="Skill47Ab" title="Skill47Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill47CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill47Mod" title="Skill47Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill47AbMod" title="Skill47AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill47Rank" title="Skill47Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill47MiscMod" title="Skill47MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill47ACP" title="Skill47ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill48" title="Skill48"></td>
+            <td class="unit"><input class="text" type="text" name="Skill48Ab" title="Skill48Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill48CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill48Mod" title="Skill48Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill48AbMod" title="Skill48AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill48Rank" title="Skill48Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill48MiscMod" title="Skill48MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill48ACP" title="Skill48ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill49" title="Skill49"></td>
+            <td class="unit"><input class="text" type="text" name="Skill49Ab" title="Skill49Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill49CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill49Mod" title="Skill49Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill49AbMod" title="Skill49AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill49Rank" title="Skill49Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill49MiscMod" title="Skill49MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill49ACP" title="Skill49ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill50" title="Skill50"></td>
+            <td class="unit"><input class="text" type="text" name="Skill50Ab" title="Skill50Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill50CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill50Mod" title="Skill50Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill50AbMod" title="Skill50AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill50Rank" title="Skill50Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill50MiscMod" title="Skill50MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill50ACP" title="Skill50ACP"></td>
+          </tr>
+              <tr class="skillslot">
+            <td class="name"><input class="text" type="text" name="Skill51" title="Skill51"></td>
+            <td class="unit"><input class="text" type="text" name="Skill51Ab" title="Skill51Ab"></td>
+            <td class="char"><input class="chk" type="checkbox" name="Skill51CC"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill51Mod" title="Skill51Mod"></td>
+            <td class="char" style="width 6px">=</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill51AbMod" title="Skill51AbMod"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill51Rank" title="Skill51Rank"></td>
+            <td class="char">+</td>
+            <td class="skillmod"><input class="text" type="text" name="Skill51MiscMod" title="Skill51MiscMod"></td>
+            <td class="skillmod"><input class="text" type="text" name="Skill51ACP" title="Skill51ACP"></td>
+          </tr>
+              <tr class="footer">
+            <td>Total Skill Points:</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="total"><span id="totalranks" name="totalranks" class="unsaved">0</span></td>
+            <td></td>
+            <td></td>
+          </tr>
+		</tbody></table>
+
+		  </td>
+		  <td class="spacer"></td>
+
+		  <td id="featsandgearcontainer">
+
+
+			<table id="gear" cellspacing="0">
+			  <tbody><tr class="title">
+				<td colspan="3">Other Possessions</td>
+			  </tr>
+			  <tr class="header">
+			<td class="name"><a title="Sort by Item">Item</a></td>
+			<td class="unit"><a title="Sort by Weight">Weight<br>(lbs)</a></td>
+			<td class="unit"><a title="Sort by Location">Loc</a></td>
+			  </tr>
+
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear01" title="Gear01"></td>
+				<td><input type="text" name="Gear01W" title="Gear01W"></td>
+				<td><input type="text" name="Gear01Loc" title="Gear01Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear02" title="Gear02"></td>
+				<td><input type="text" name="Gear02W" title="Gear02W"></td>
+				<td><input type="text" name="Gear02Loc" title="Gear02Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear03" title="Gear03"></td>
+				<td><input type="text" name="Gear03W" title="Gear03W"></td>
+				<td><input type="text" name="Gear03Loc" title="Gear03Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear04" title="Gear04"></td>
+				<td><input type="text" name="Gear04W" title="Gear04W"></td>
+				<td><input type="text" name="Gear04Loc" title="Gear04Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear05" title="Gear05"></td>
+				<td><input type="text" name="Gear05W" title="Gear05W"></td>
+				<td><input type="text" name="Gear05Loc" title="Gear05Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear06" title="Gear06"></td>
+				<td><input type="text" name="Gear06W" title="Gear06W"></td>
+				<td><input type="text" name="Gear06Loc" title="Gear06Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear07" title="Gear07"></td>
+				<td><input type="text" name="Gear07W" title="Gear07W"></td>
+				<td><input type="text" name="Gear07Loc" title="Gear07Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear08" title="Gear08"></td>
+				<td><input type="text" name="Gear08W" title="Gear08W"></td>
+				<td><input type="text" name="Gear08Loc" title="Gear08Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear09" title="Gear09"></td>
+				<td><input type="text" name="Gear09W" title="Gear09W"></td>
+				<td><input type="text" name="Gear09Loc" title="Gear09Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear10" title="Gear10"></td>
+				<td><input type="text" name="Gear10W" title="Gear10W"></td>
+				<td><input type="text" name="Gear10Loc" title="Gear10Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear11" title="Gear11"></td>
+				<td><input type="text" name="Gear11W" title="Gear11W"></td>
+				<td><input type="text" name="Gear11Loc" title="Gear11Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear12" title="Gear12"></td>
+				<td><input type="text" name="Gear12W" title="Gear12W"></td>
+				<td><input type="text" name="Gear12Loc" title="Gear12Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear13" title="Gear13"></td>
+				<td><input type="text" name="Gear13W" title="Gear13W"></td>
+				<td><input type="text" name="Gear13Loc" title="Gear13Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear14" title="Gear14"></td>
+				<td><input type="text" name="Gear14W" title="Gear14W"></td>
+				<td><input type="text" name="Gear14Loc" title="Gear14Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear15" title="Gear15"></td>
+				<td><input type="text" name="Gear15W" title="Gear15W"></td>
+				<td><input type="text" name="Gear15Loc" title="Gear15Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear16" title="Gear16"></td>
+				<td><input type="text" name="Gear16W" title="Gear16W"></td>
+				<td><input type="text" name="Gear16Loc" title="Gear16Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear17" title="Gear17"></td>
+				<td><input type="text" name="Gear17W" title="Gear17W"></td>
+				<td><input type="text" name="Gear17Loc" title="Gear17Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear18" title="Gear18"></td>
+				<td><input type="text" name="Gear18W" title="Gear18W"></td>
+				<td><input type="text" name="Gear18Loc" title="Gear18Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear19" title="Gear19"></td>
+				<td><input type="text" name="Gear19W" title="Gear19W"></td>
+				<td><input type="text" name="Gear19Loc" title="Gear19Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear20" title="Gear20"></td>
+				<td><input type="text" name="Gear20W" title="Gear20W"></td>
+				<td><input type="text" name="Gear20Loc" title="Gear20Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear21" title="Gear21"></td>
+				<td><input type="text" name="Gear21W" title="Gear21W"></td>
+				<td><input type="text" name="Gear21Loc" title="Gear21Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear22" title="Gear22"></td>
+				<td><input type="text" name="Gear22W" title="Gear22W"></td>
+				<td><input type="text" name="Gear22Loc" title="Gear22Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear23" title="Gear23"></td>
+				<td><input type="text" name="Gear23W" title="Gear23W"></td>
+				<td><input type="text" name="Gear23Loc" title="Gear23Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear24" title="Gear24"></td>
+				<td><input type="text" name="Gear24W" title="Gear24W"></td>
+				<td><input type="text" name="Gear24Loc" title="Gear24Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear25" title="Gear25"></td>
+				<td><input type="text" name="Gear25W" title="Gear25W"></td>
+				<td><input type="text" name="Gear25Loc" title="Gear25Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear26" title="Gear26"></td>
+				<td><input type="text" name="Gear26W" title="Gear26W"></td>
+				<td><input type="text" name="Gear26Loc" title="Gear26Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear27" title="Gear27"></td>
+				<td><input type="text" name="Gear27W" title="Gear27W"></td>
+				<td><input type="text" name="Gear27Loc" title="Gear27Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear28" title="Gear28"></td>
+				<td><input type="text" name="Gear28W" title="Gear28W"></td>
+				<td><input type="text" name="Gear28Loc" title="Gear28Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear29" title="Gear29"></td>
+				<td><input type="text" name="Gear29W" title="Gear29W"></td>
+				<td><input type="text" name="Gear29Loc" title="Gear29Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear30" title="Gear30"></td>
+				<td><input type="text" name="Gear30W" title="Gear30W"></td>
+				<td><input type="text" name="Gear30Loc" title="Gear30Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear31" title="Gear31"></td>
+				<td><input type="text" name="Gear31W" title="Gear31W"></td>
+				<td><input type="text" name="Gear31Loc" title="Gear31Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear32" title="Gear32"></td>
+				<td><input type="text" name="Gear32W" title="Gear32W"></td>
+				<td><input type="text" name="Gear32Loc" title="Gear32Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear33" title="Gear33"></td>
+				<td><input type="text" name="Gear33W" title="Gear33W"></td>
+				<td><input type="text" name="Gear33Loc" title="Gear33Loc"></td>
+			  </tr>
+	
+			  <tr class="slot">
+				<td><input class="name" type="text" name="Gear34" title="Gear34"></td>
+				<td><input type="text" name="Gear34W" title="Gear34W"></td>
+				<td><input type="text" name="Gear34Loc" title="Gear34Loc"></td>
+			  </tr>
+	
+			  <tr class="footer">
+				<td>Total Weight:</td>
+				<td class="total"><span id="totalweight" name="totalweight"></span></td>
+				<td></td>
+			  </tr>
+			</tbody></table>
+
+
+
+
+
+			<table id="currency">
+			  <tbody><tr class="title">
+				<td>Currency</td>
+			  </tr>
+			  <tr>
+				<td><textarea name="__txt_Cash" title="Cash" rows="10" cols="10"></textarea></td>
+			  </tr>
+			</tbody></table>
+
+
+
+			<table id="languages">
+			  <tbody><tr class="title"><td colspan="2">Languages</td></tr>
+			  <tr><td><input type="text" name="Lang1" title="Lang1"></td>
+				  <td><input type="text" name="Lang2" title="Lang2"></td></tr>
+			  <tr><td><input type="text" name="Lang3" title="Lang3"></td>
+				  <td><input type="text" name="Lang4" title="Lang4"></td></tr>
+			  <tr><td><input type="text" name="Lang5" title="Lang5"></td>
+				  <td><input type="text" name="Lang6" title="Lang6"></td></tr>
+			  <tr><td><input type="text" name="Lang7" title="Lang7"></td>
+				  <td><input type="text" name="Lang8" title="Lang8"></td></tr>
+			</tbody></table>
+
+
+
+
+		  </td>
+		</tr>
+	  </tbody></table>
+
+</div>
+<div class="page">
+
+	  <!--
+		Page 3 stuff, Spell Saves, Spells & Powers, Currency, Language...
+	  -->
+
+
+
+
+	  <table id="spellstuff" cellspacing="0">
+
+	  	<tbody><tr>
+	  		<td class="saves">
+
+                  <table cellspacing="0" class="spellsknown" id="spellsknown">
+                    <tbody><tr class="title">
+                      <td colspan="4">Spells/Powers Known</td>
+                    </tr>
+                    <tr><td colspan="4"> (Bards, Sorcerers, Psions &amp; Psi Warriors)</td></tr>
+                    <tr>
+                    	<td>0</td><td><input type="text" name="SpellsKnown0" title="SpellsKnown0"></td>
+                    	<td>5th</td><td><input type="text" name="SpellsKnown5" title="SpellsKnown5"></td>
+                    </tr>
+                    <tr>
+                    	<td>1st</td><td><input type="text" name="SpellsKnown1" title="SpellsKnown1"></td>
+                    	<td>6th</td><td><input type="text" name="SpellsKnown6" title="SpellsKnown6"></td>
+                    </tr>
+                    <tr>
+                    	<td>2nd</td><td><input type="text" name="SpellsKnown2" title="SpellsKnown2"></td>
+                   		<td>7th</td><td><input type="text" name="SpellsKnown7" title="SpellsKnown7"></td>
+                    </tr>
+                    <tr>
+                    	<td>3rd</td><td><input type="text" name="SpellsKnown3" title="SpellsKnown3"></td>
+                    	<td>8th</td><td><input type="text" name="SpellsKnown8" title="SpellsKnown8"></td>
+                    </tr>
+                    <tr>
+                    	<td>4th</td><td><input type="text" name="SpellsKnown4" title="SpellsKnown4"></td>
+                    	<td>9th</td><td><input type="text" name="SpellsKnown9" title="SpellsKnown9"></td>
+                    </tr>
+                  
+                    
+                  </tbody></table>
+
+	            <table id="spellsaves" cellspacing="0">
+	              <tbody><tr class="title">
+	                <td colspan="4">Spell Saves</td>
+	              </tr>
+	              <tr class="header">
+	                <td>Save<br>DC</td>
+	                <td class="level">LEVEL</td>
+	                <td>Spells<br>/Day</td>
+	                <td>Bonus<br>Spells</td>
+	              </tr>
+
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC0" title="SpellDC0"></td>
+	                <td class="level">0</td>
+	                <td><input type="text" name="SpellPerDay0" title="SpellPerDay0"></td>
+	                <td class="noinput">0</td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC1" title="SpellDC1"></td>
+	                <td class="level">1st</td>
+	                <td><input type="text" name="SpellPerDay1" title="SpellPerDay1"></td>
+	                <td><input type="text" name="BonusSpells1" title="BonusSpells1"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC2" title="SpellDC2"></td>
+	                <td class="level">2nd</td>
+	                <td><input type="text" name="SpellPerDay2" title="SpellPerDay2"></td>
+	                <td><input type="text" name="BonusSpells2" title="BonusSpells2"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC3" title="SpellDC3"></td>
+	                <td class="level">3rd</td>
+	                <td><input type="text" name="SpellPerDay3" title="SpellPerDay3"></td>
+	                <td><input type="text" name="BonusSpells3" title="BonusSpells3"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC4" title="SpellDC4"></td>
+	                <td class="level">4th</td>
+	                <td><input type="text" name="SpellPerDay4" title="SpellPerDay4"></td>
+	                <td><input type="text" name="BonusSpells4" title="BonusSpells4"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC5" title="SpellDC5"></td>
+	                <td class="level">5th</td>
+	                <td><input type="text" name="SpellPerDay5" title="SpellPerDay5"></td>
+	                <td><input type="text" name="BonusSpells5" title="BonusSpells5"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC6" title="SpellDC6"></td>
+	                <td class="level">6th</td>
+	                <td><input type="text" name="SpellPerDay6" title="SpellPerDay6"></td>
+	                <td><input type="text" name="BonusSpells6" title="BonusSpells6"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC7" title="SpellDC7"></td>
+	                <td class="level">7th</td>
+	                <td><input type="text" name="SpellPerDay7" title="SpellPerDay7"></td>
+	                <td><input type="text" name="BonusSpells7" title="BonusSpells7"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC8" title="SpellDC8"></td>
+	                <td class="level">8th</td>
+	                <td><input type="text" name="SpellPerDay8" title="SpellPerDay8"></td>
+	                <td><input type="text" name="BonusSpells8" title="BonusSpells8"></td>
+	              </tr>
+
+	    
+	              <tr class="save">
+	                <td><input type="text" name="SpellDC9" title="SpellDC9"></td>
+	                <td class="level">9th</td>
+	                <td><input type="text" name="SpellPerDay9" title="SpellPerDay9"></td>
+	                <td><input type="text" name="BonusSpells9" title="BonusSpells9"></td>
+	              </tr>
+
+	    
+	            </tbody></table>
+
+
+
+	            <table id="spellsaves">
+	                <tbody><tr class="title"><td colspan="4">Psionics</td></tr>
+	                <tr class="header">
+	                <td>Manifester<br>Level</td>
+	                <td><input type="text" name="ManifesterLevel" title="ManifesterLevel" onchange="CalcPsi();"></td>
+	                <td><input type="text" name="PsiKeyAb" title="PsiKeyAb" maxlength="3" onchange="CalcPsi();"></td>
+	                <td>Key<br>Ability</td>
+	                </tr>
+	                <tr>
+	                <td><input type="text" name="PowerPointsBase" title="PowerPointsBase" onchange="CalcPsiMax()"></td>
+	                <td><input type="text" name="PowerPointsBonus" title="PowerPointsBonus" onchange="CalcPsiMax()"></td>
+	                <td><input type="text" name="PowerPointsMax" title="PowerPointsMax"></td>
+	                <td><input type="text" name="PowerPoints" title="PowerPoints"></td>
+	                </tr>
+	                <tr class="header">
+	                <td>Base</td>
+	                <td>Bonus</td>
+	                <td>Max</td>
+	                <td>Current</td>
+	                </tr>
+	            </tbody></table>
+
+
+	  		</td>
+
+	  		<td>
+
+	  			<table cellspacing="0" id="spells">
+	  				<tbody><tr class="title">
+	  					<td>Spells &amp; Powers</td>
+	  				</tr>
+	  				<tr>
+<td class="list">
+
+            <table cellspacing="0" style="width: 100%">
+              <tbody><tr>
+                <td>
+
+                  <table cellspacing="0" class="spelllist">
+                    <tbody><tr class="header">
+                      <td><a title="Sort by Spell Name">Spell/Power Name</a></td>
+                      <td class="mem"><a title="Sort by Number of times cast, memorized, or manifested"># Cast<br>/Mem</a></td>
+                    </tr>
+
+                            <tr>
+                      <td class="name"><input type="text" name="Spell01" title="Spell01"></td>
+                      <td class="mem"><input type="text" name="Spell01Cast" title="Spell01Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell02" title="Spell02"></td>
+                      <td class="mem"><input type="text" name="Spell02Cast" title="Spell02Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell03" title="Spell03"></td>
+                      <td class="mem"><input type="text" name="Spell03Cast" title="Spell03Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell04" title="Spell04"></td>
+                      <td class="mem"><input type="text" name="Spell04Cast" title="Spell04Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell05" title="Spell05"></td>
+                      <td class="mem"><input type="text" name="Spell05Cast" title="Spell05Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell06" title="Spell06"></td>
+                      <td class="mem"><input type="text" name="Spell06Cast" title="Spell06Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell07" title="Spell07"></td>
+                      <td class="mem"><input type="text" name="Spell07Cast" title="Spell07Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell08" title="Spell08"></td>
+                      <td class="mem"><input type="text" name="Spell08Cast" title="Spell08Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell09" title="Spell09"></td>
+                      <td class="mem"><input type="text" name="Spell09Cast" title="Spell09Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell10" title="Spell10"></td>
+                      <td class="mem"><input type="text" name="Spell10Cast" title="Spell10Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell11" title="Spell11"></td>
+                      <td class="mem"><input type="text" name="Spell11Cast" title="Spell11Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell12" title="Spell12"></td>
+                      <td class="mem"><input type="text" name="Spell12Cast" title="Spell12Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell13" title="Spell13"></td>
+                      <td class="mem"><input type="text" name="Spell13Cast" title="Spell13Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell14" title="Spell14"></td>
+                      <td class="mem"><input type="text" name="Spell14Cast" title="Spell14Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell15" title="Spell15"></td>
+                      <td class="mem"><input type="text" name="Spell15Cast" title="Spell15Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell16" title="Spell16"></td>
+                      <td class="mem"><input type="text" name="Spell16Cast" title="Spell16Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell17" title="Spell17"></td>
+                      <td class="mem"><input type="text" name="Spell17Cast" title="Spell17Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell18" title="Spell18"></td>
+                      <td class="mem"><input type="text" name="Spell18Cast" title="Spell18Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell19" title="Spell19"></td>
+                      <td class="mem"><input type="text" name="Spell19Cast" title="Spell19Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell20" title="Spell20"></td>
+                      <td class="mem"><input type="text" name="Spell20Cast" title="Spell20Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell21" title="Spell21"></td>
+                      <td class="mem"><input type="text" name="Spell21Cast" title="Spell21Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell22" title="Spell22"></td>
+                      <td class="mem"><input type="text" name="Spell22Cast" title="Spell22Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell23" title="Spell23"></td>
+                      <td class="mem"><input type="text" name="Spell23Cast" title="Spell23Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell24" title="Spell24"></td>
+                      <td class="mem"><input type="text" name="Spell24Cast" title="Spell24Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell25" title="Spell25"></td>
+                      <td class="mem"><input type="text" name="Spell25Cast" title="Spell25Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell26" title="Spell26"></td>
+                      <td class="mem"><input type="text" name="Spell26Cast" title="Spell26Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell27" title="Spell27"></td>
+                      <td class="mem"><input type="text" name="Spell27Cast" title="Spell27Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell28" title="Spell28"></td>
+                      <td class="mem"><input type="text" name="Spell28Cast" title="Spell28Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell29" title="Spell29"></td>
+                      <td class="mem"><input type="text" name="Spell29Cast" title="Spell29Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell30" title="Spell30"></td>
+                      <td class="mem"><input type="text" name="Spell30Cast" title="Spell30Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell31" title="Spell31"></td>
+                      <td class="mem"><input type="text" name="Spell31Cast" title="Spell31Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell32" title="Spell32"></td>
+                      <td class="mem"><input type="text" name="Spell32Cast" title="Spell32Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell33" title="Spell33"></td>
+                      <td class="mem"><input type="text" name="Spell33Cast" title="Spell33Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell34" title="Spell34"></td>
+                      <td class="mem"><input type="text" name="Spell34Cast" title="Spell34Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell35" title="Spell35"></td>
+                      <td class="mem"><input type="text" name="Spell35Cast" title="Spell35Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell36" title="Spell36"></td>
+                      <td class="mem"><input type="text" name="Spell36Cast" title="Spell36Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell37" title="Spell37"></td>
+                      <td class="mem"><input type="text" name="Spell37Cast" title="Spell37Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell38" title="Spell38"></td>
+                      <td class="mem"><input type="text" name="Spell38Cast" title="Spell38Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell39" title="Spell39"></td>
+                      <td class="mem"><input type="text" name="Spell39Cast" title="Spell39Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell40" title="Spell40"></td>
+                      <td class="mem"><input type="text" name="Spell40Cast" title="Spell40Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell41" title="Spell41"></td>
+                      <td class="mem"><input type="text" name="Spell41Cast" title="Spell41Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell42" title="Spell42"></td>
+                      <td class="mem"><input type="text" name="Spell42Cast" title="Spell42Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell43" title="Spell43"></td>
+                      <td class="mem"><input type="text" name="Spell43Cast" title="Spell43Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell44" title="Spell44"></td>
+                      <td class="mem"><input type="text" name="Spell44Cast" title="Spell44Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell45" title="Spell45"></td>
+                      <td class="mem"><input type="text" name="Spell45Cast" title="Spell45Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell46" title="Spell46"></td>
+                      <td class="mem"><input type="text" name="Spell46Cast" title="Spell46Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell47" title="Spell47"></td>
+                      <td class="mem"><input type="text" name="Spell47Cast" title="Spell47Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell48" title="Spell48"></td>
+                      <td class="mem"><input type="text" name="Spell48Cast" title="Spell48Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell49" title="Spell49"></td>
+                      <td class="mem"><input type="text" name="Spell49Cast" title="Spell49Cast"></td>
+                    </tr>    
+                            <tr>
+                      <td class="name"><input type="text" name="Spell50" title="Spell50"></td>
+                      <td class="mem"><input type="text" name="Spell50Cast" title="Spell50Cast"></td>
+                    </tr>
+                          <tr>
+                      <td class="name"><input type="text" name="Spell51" title="Spell51"></td>
+                      <td class="mem"><input type="text" name="Spell51Cast" title="Spell51Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell52" title="Spell52"></td>
+                      <td class="mem"><input type="text" name="Spell52Cast" title="Spell52Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell53" title="Spell53"></td>
+                      <td class="mem"><input type="text" name="Spell53Cast" title="Spell53Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell54" title="Spell54"></td>
+                      <td class="mem"><input type="text" name="Spell54Cast" title="Spell54Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell55" title="Spell55"></td>
+                      <td class="mem"><input type="text" name="Spell55Cast" title="Spell55Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell56" title="Spell56"></td>
+                      <td class="mem"><input type="text" name="Spell56Cast" title="Spell56Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell57" title="Spell57"></td>
+                      <td class="mem"><input type="text" name="Spell57Cast" title="Spell57Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell58" title="Spell58"></td>
+                      <td class="mem"><input type="text" name="Spell58Cast" title="Spell58Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell59" title="Spell59"></td>
+                      <td class="mem"><input type="text" name="Spell59Cast" title="Spell59Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell60" title="Spell60"></td>
+                      <td class="mem"><input type="text" name="Spell60Cast" title="Spell60Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell61" title="Spell61"></td>
+                      <td class="mem"><input type="text" name="Spell61Cast" title="Spell61Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell62" title="Spell62"></td>
+                      <td class="mem"><input type="text" name="Spell62Cast" title="Spell62Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell63" title="Spell63"></td>
+                      <td class="mem"><input type="text" name="Spell63Cast" title="Spell63Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell64" title="Spell64"></td>
+                      <td class="mem"><input type="text" name="Spell64Cast" title="Spell64Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell65" title="Spell65"></td>
+                      <td class="mem"><input type="text" name="Spell65Cast" title="Spell65Cast"></td>
+                    </tr>
+                            <tr>
+                      <td class="name"><input type="text" name="Spell66" title="Spell66"></td>
+                      <td class="mem"><input type="text" name="Spell66Cast" title="Spell66Cast"></td>
+                    </tr>
+
+                    <tr>
+                      <td class="name"><input type="text" name="Spell67" title="Spell67"></td>
+                      <td class="mem"><input type="text" name="Spell67Cast" title="Spell67Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell68" title="Spell68"></td>
+                      <td class="mem"><input type="text" name="Spell68Cast" title="Spell68Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell69" title="Spell69"></td>
+                      <td class="mem"><input type="text" name="Spell69Cast" title="Spell69Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell70" title="Spell70"></td>
+                      <td class="mem"><input type="text" name="Spell70Cast" title="Spell70Cast"></td>
+                    </tr>      
+                  </tbody></table>
+
+                </td>
+                <td>
+                  
+                  <table cellspacing="0" class="spelllist">
+                    <tbody><tr class="header">
+                      <td><a title="Sort by Spell Name">Spell/Power Name</a></td>
+                      <td class="mem"><a title="Sort by Number of times cast, memorized, or manifested"># Cast<br>/Mem</a></td>
+                    </tr>
+                                          <tr>
+                      <td class="name"><input type="text" name="Spell71" title="Spell71"></td>
+                      <td class="mem"><input type="text" name="Spell71Cast" title="Spell71Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell72" title="Spell72"></td>
+                      <td class="mem"><input type="text" name="Spell72Cast" title="Spell72Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell73" title="Spell73"></td>
+                      <td class="mem"><input type="text" name="Spell73Cast" title="Spell73Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell74" title="Spell74"></td>
+                      <td class="mem"><input type="text" name="Spell74Cast" title="Spell74Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell75" title="Spell75"></td>
+                      <td class="mem"><input type="text" name="Spell75Cast" title="Spell75Cast"></td>
+                    </tr>
+                          <tr>
+                      <td class="name"><input type="text" name="Spell76" title="Spell76"></td>
+                      <td class="mem"><input type="text" name="Spell76Cast" title="Spell76Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell77" title="Spell77"></td>
+                      <td class="mem"><input type="text" name="Spell77Cast" title="Spell77Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell78" title="Spell78"></td>
+                      <td class="mem"><input type="text" name="Spell78Cast" title="Spell78Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell79" title="Spell79"></td>
+                      <td class="mem"><input type="text" name="Spell79Cast" title="Spell79Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell80" title="Spell80"></td>
+                      <td class="mem"><input type="text" name="Spell80Cast" title="Spell80Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell81" title="Spell81"></td>
+                      <td class="mem"><input type="text" name="Spell81Cast" title="Spell81Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell82" title="Spell82"></td>
+                      <td class="mem"><input type="text" name="Spell82Cast" title="Spell82Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell83" title="Spell83"></td>
+                      <td class="mem"><input type="text" name="Spell83Cast" title="Spell83Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell84" title="Spell84"></td>
+                      <td class="mem"><input type="text" name="Spell84Cast" title="Spell84Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell85" title="Spell85"></td>
+                      <td class="mem"><input type="text" name="Spell85Cast" title="Spell85Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell86" title="Spell86"></td>
+                      <td class="mem"><input type="text" name="Spell86Cast" title="Spell86Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell87" title="Spell87"></td>
+                      <td class="mem"><input type="text" name="Spell87Cast" title="Spell87Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell88" title="Spell88"></td>
+                      <td class="mem"><input type="text" name="Spell88Cast" title="Spell88Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell89" title="Spell89"></td>
+                      <td class="mem"><input type="text" name="Spell89Cast" title="Spell89Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell90" title="Spell90"></td>
+                      <td class="mem"><input type="text" name="Spell90Cast" title="Spell90Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell91" title="Spell91"></td>
+                      <td class="mem"><input type="text" name="Spell91Cast" title="Spell91Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell92" title="Spell92"></td>
+                      <td class="mem"><input type="text" name="Spell92Cast" title="Spell92Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell93" title="Spell93"></td>
+                      <td class="mem"><input type="text" name="Spell93Cast" title="Spell93Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell94" title="Spell94"></td>
+                      <td class="mem"><input type="text" name="Spell94Cast" title="Spell94Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell95" title="Spell95"></td>
+                      <td class="mem"><input type="text" name="Spell95Cast" title="Spell95Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell96" title="Spell96"></td>
+                      <td class="mem"><input type="text" name="Spell96Cast" title="Spell96Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell97" title="Spell97"></td>
+                      <td class="mem"><input type="text" name="Spell97Cast" title="Spell97Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell98" title="Spell98"></td>
+                      <td class="mem"><input type="text" name="Spell98Cast" title="Spell98Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell99" title="Spell99"></td>
+                      <td class="mem"><input type="text" name="Spell99Cast" title="Spell99Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell100" title="Spell100"></td>
+                      <td class="mem"><input type="text" name="Spell100Cast" title="Spell100Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell101" title="Spell101"></td>
+                      <td class="mem"><input type="text" name="Spell101Cast" title="Spell101Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell102" title="Spell102"></td>
+                      <td class="mem"><input type="text" name="Spell102Cast" title="Spell102Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell103" title="Spell103"></td>
+                      <td class="mem"><input type="text" name="Spell103Cast" title="Spell103Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell104" title="Spell104"></td>
+                      <td class="mem"><input type="text" name="Spell104Cast" title="Spell104Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell105" title="Spell105"></td>
+                      <td class="mem"><input type="text" name="Spell105Cast" title="Spell105Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell106" title="Spell106"></td>
+                      <td class="mem"><input type="text" name="Spell106Cast" title="Spell106Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell107" title="Spell107"></td>
+                      <td class="mem"><input type="text" name="Spell107Cast" title="Spell107Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell108" title="Spell108"></td>
+                      <td class="mem"><input type="text" name="Spell108Cast" title="Spell108Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell109" title="Spell109"></td>
+                      <td class="mem"><input type="text" name="Spell109Cast" title="Spell109Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell110" title="Spell110"></td>
+                      <td class="mem"><input type="text" name="Spell110Cast" title="Spell110Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell111" title="Spell111"></td>
+                      <td class="mem"><input type="text" name="Spell111Cast" title="Spell111Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell112" title="Spell112"></td>
+                      <td class="mem"><input type="text" name="Spell112Cast" title="Spell112Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell113" title="Spell113"></td>
+                      <td class="mem"><input type="text" name="Spell113Cast" title="Spell113Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell114" title="Spell114"></td>
+                      <td class="mem"><input type="text" name="Spell114Cast" title="Spell114Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell115" title="Spell115"></td>
+                      <td class="mem"><input type="text" name="Spell115Cast" title="Spell115Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell116" title="Spell116"></td>
+                      <td class="mem"><input type="text" name="Spell116Cast" title="Spell116Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell117" title="Spell117"></td>
+                      <td class="mem"><input type="text" name="Spell117Cast" title="Spell117Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell118" title="Spell118"></td>
+                      <td class="mem"><input type="text" name="Spell118Cast" title="Spell118Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell119" title="Spell119"></td>
+                      <td class="mem"><input type="text" name="Spell119Cast" title="Spell119Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell120" title="Spell120"></td>
+                      <td class="mem"><input type="text" name="Spell120Cast" title="Spell120Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell121" title="Spell121"></td>
+                      <td class="mem"><input type="text" name="Spell121Cast" title="Spell121Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell122" title="Spell122"></td>
+                      <td class="mem"><input type="text" name="Spell122Cast" title="Spell122Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell123" title="Spell123"></td>
+                      <td class="mem"><input type="text" name="Spell123Cast" title="Spell123Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell124" title="Spell124"></td>
+                      <td class="mem"><input type="text" name="Spell124Cast" title="Spell124Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell125" title="Spell125"></td>
+                      <td class="mem"><input type="text" name="Spell125Cast" title="Spell125Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell126" title="Spell126"></td>
+                      <td class="mem"><input type="text" name="Spell126Cast" title="Spell126Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell127" title="Spell127"></td>
+                      <td class="mem"><input type="text" name="Spell127Cast" title="Spell127Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell128" title="Spell128"></td>
+                      <td class="mem"><input type="text" name="Spell128Cast" title="Spell128Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell129" title="Spell129"></td>
+                      <td class="mem"><input type="text" name="Spell129Cast" title="Spell129Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell130" title="Spell130"></td>
+                      <td class="mem"><input type="text" name="Spell130Cast" title="Spell130Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell131" title="Spell131"></td>
+                      <td class="mem"><input type="text" name="Spell131Cast" title="Spell131Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell132" title="Spell132"></td>
+                      <td class="mem"><input type="text" name="Spell132Cast" title="Spell132Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell133" title="Spell133"></td>
+                      <td class="mem"><input type="text" name="Spell133Cast" title="Spell133Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell134" title="Spell134"></td>
+                      <td class="mem"><input type="text" name="Spell134Cast" title="Spell134Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell135" title="Spell135"></td>
+                      <td class="mem"><input type="text" name="Spell135Cast" title="Spell135Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell136" title="Spell136"></td>
+                      <td class="mem"><input type="text" name="Spell136Cast" title="Spell136Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell137" title="Spell137"></td>
+                      <td class="mem"><input type="text" name="Spell137Cast" title="Spell137Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell138" title="Spell138"></td>
+                      <td class="mem"><input type="text" name="Spell138Cast" title="Spell138Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell139" title="Spell139"></td>
+                      <td class="mem"><input type="text" name="Spell139Cast" title="Spell139Cast"></td>
+                    </tr>                            <tr>
+                      <td class="name"><input type="text" name="Spell140" title="Spell140"></td>
+                      <td class="mem"><input type="text" name="Spell140Cast" title="Spell140Cast"></td>
+                    </tr>       
+
+                          </tbody></table>
+
+                </td>
+              </tr>
+            </tbody></table>
+
+          </td>
+
+	  				</tr>
+	  			</tbody></table>
+
+
+
+	  		</td>
+
+	  	</tr>
+	  </tbody></table>
+	  
+</div>
+<div class="page">
+	  
+
+<table id="details" style="width: 100%">
+<tbody><tr>          <td><div id="spacer" style="height: 1em;"></div></td></tr>
+<tr>
+<td>
+<div id="description" style="float: left; width: 49%;">
+Description<br>
+<div class="textarea-wrapper">
+<textarea name="__txt_char_description" title="char_description" style="width: 100%; height: 7.5em;" class="bordered"></textarea>
+<div class="textarea-print" name="__txt_char_description"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+</div>
+
+<div id="personality" style="float: right; width: 49%;">
+Personality<br>
+
+<div class="textarea-wrapper">
+<textarea name="__txt_char_personality" title="char_personality" style="width: 100%; height: 7.5em;" class="bordered"></textarea>
+<div class="textarea-print" name="__txt_char_personality"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+</div>
+<div id="chartraits" style="float: left; width: 49%;">
+Character Traits<br>
+
+<div class="textarea-wrapper">
+<textarea name="__txt_char_traits" title="char_traits" style="width: 100%; height: 7.5em;" class="bordered"></textarea>
+<div class="textarea-print" name="__txt_char_traits"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+</div>
+<div id="charflaws" style="float: right; width: 49%;">
+Character Flaws<br>
+
+<div class="textarea-wrapper">
+<textarea name="__txt_char_flaws" title="char_flaws" style="width: 100%; height: 7.5em;" class="bordered"></textarea>
+<div class="textarea-print" name="__txt_char_flaws"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+</div>
+<div id="contacts_friends" style="float: left; width: 49%;">
+Contacts / Friends<br>
+
+<div class="textarea-wrapper">
+<textarea name="__txt_char_contacts" title="char_contacts" style="width: 100%; height: 7.5em;" class="bordered"></textarea>
+<div class="textarea-print" name="__txt_char_contacts"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+</div>
+<div id="enemies" style="float: right; width: 49%;">
+Enemies<br>
+
+<div class="textarea-wrapper">
+<textarea name="__txt_char_enemies" title="char_enemies" style="width: 100%; height: 7.5em;" class="bordered"></textarea>
+<div class="textarea-print" name="__txt_char_enemies"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+</div>
+</td>
+</tr>
+</tbody></table>
+
+	  <table id="statsummary" style="width: 100%;">
+   <tbody><tr class="header">
+	 <td colspan="2">
+	Statistic Block 
+	<span id="statblockcontext">
+	  [ <a id="npc_import_button" title="Fill the character sheet from an Myth-Weavers NPC Generator Statblock.">NPC Gen Import</a>]
+	[ <a id="statblockbutton" title="Fill the Statblock with your current character's statistics.">Generate Statblock</a> ]
+										</span>
+	 </td>
+   </tr>
+   <tr>
+	 <td colspan="2">
+
+<div class="textarea-wrapper">
+	  <textarea name="__txt_statsummary" title="statsummary" cols="10" ,="" rows="10"></textarea>
+<div class="textarea-print" name="__txt_statsummary"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+</td>
+   </tr>
+   <tr class="header">
+	 <td width="50%">Condition and Effects</td>
+	 <td width="50%">Additional Information</td>
+   </tr>
+  <tr>
+	<td width="25%">
+
+<div class="textarea-wrapper">
+	  <textarea name="__txt_text1" title="text1" cols="10" ,="" rows="10"></textarea>
+<div class="textarea-print" name="__txt_text1"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+
+	</td>
+	<td width="25%">
+
+<div class="textarea-wrapper">
+	  <textarea name="__txt_text2" title="text2" cols="10" ,="" rows="10"></textarea>
+<div class="textarea-print" name="__txt_text2"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+
+	</td>
+  </tr>
+</tbody></table>
+
+	  <table id="notes">
+		
+		<tbody><tr class="header">
+		  <td>
+			Other Notes
+		  </td>
+		</tr>
+		<tr>
+		  <td>
+
+<div class="textarea-wrapper">
+			<textarea name="__txt_Notes" title="Notes" cols="10" rows="10"></textarea>
+<div class="textarea-print" name="__txt_Notes"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+
+		  </td>
+		</tr>
+	  </tbody></table>
+  
+<div id="private_notes">
+<span style="color: gray;">Private Notes</span>
+<br>
+
+<div class="textarea-wrapper">
+<textarea name="__txt_private_notes" style="width: 100%; height: 2.5in;" class="bordered_gray"></textarea>
+<div class="textarea-print" name="__txt_private_notes"></div>
+<span class="textarea-expand"><i class="fa fa-expand"></i></span></div>
+
+</div>
+
+	<input type="hidden" name="PicURL" title="PicURL" value="">    
+				
+	  <div id="footer">
+		3EProfiler™ Character Sheet, © 2003 by M. J. Eggertson.
+	  </div>
+
+</div>
+
 </form>
+	</div>
+	
+	
+
+	<div id="alerts"></div>
+
+	<div id="editor-fullscreen" class="hide">
+		<div class="container-fluid">
+			<a class="editor-fullscreen-done btn btn-default pull-right">Done</a>
+			<h1>Full Screen Editor</h1>
+			<div id="editor-wrapper">
+				<textarea></textarea>
+			</div>
+		</div>
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>
+	var devel = false;
+
+	var cache_bust_datestring = 1499962733;
+
+	window.jQuery || document.write("<script type=\"text/javascript\" src=\"/assets/js/jquery.js\">\x3C/script>")
+	document.write("<script type=\"text/javascript\" src=\"/assets/js/sheets.min.js?_=1499962733\">\x3C/script>")
+
+	// Remove responsive ad
+	var width = window.innerWidth || document.documentElement.clientWidth;
+	if (width <= 1280) {
+	    $('.responsive-skyscraper').removeClass('adsbygoogle');
+	    window.adsbygoogle.shift(); //Remove an item from the ads array.
+	}
+
+	window.addEventListener("load", function(e) {
+
+		function getCookieValue(key)
+		{
+		  var candidates = document.cookie.split(';').filter(function(item) {
+		    return item.indexOf(key+'=') >= 0;
+		  });
+		  if(candidates.length) {
+		    return candidates[0].split('=')[1];
+		  } else {
+		    return false;
+		  }
+		}
+
+		function getAdsJs()
+		{
+			$.getScript("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js");
+		}
+
+		$(window).on('render', function() {
+			if(false && logged_in) {
+				$("#username_email_warning").show();
+			}
+
+			if(getCookieValue('is_logged_in') == 1) {
+				if(typeof sheetdata.extra == 'undefined' || typeof sheetdata.extra.show_ads == 'undefined' || sheetdata.extra.show_ads === true) {
+					getAdsJs();
+				} else {
+					$("#topAdContainer, #leftAdContainer, .mwadcontainer").remove();
+				}
+			} else if(getCookieValue('user_cookie_preference') == 'optin') {
+				getAdsJs();
+			} else {
+				$("#topAdContainer, #leftAdContainer, .mwadcontainer").remove();
+			}
+		});
+	});
+</script><script type="text/javascript" src="/assets/js/sheets.min.js?_=1499962733"></script>
+<style type="text/css">
+@media print {
+  .hidden-print {
+    display: none !important;
+  }
+}
+</style>
+	
+
+</body></html>
