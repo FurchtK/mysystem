@@ -2,8 +2,10 @@
   "name": "3.5e",
   "title": "Dungeons and Dragons 3.5e",
   "description": "This game system is used to play Dungeons and Dragons 3.5e",
-  "version": "0.0.1",
   "author": "Furcht",
+  "version": "0.0.1",
+  "minimumCoreVersion": "0.6.4",
+  "compatibleCoreVersion": "0.6.4",
   "scripts": [ ],
   "esmodules": [
     "3.5e.js"
