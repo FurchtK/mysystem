@@ -1,4 +1,10 @@
 {
-  "Actor":{},
+  "Actor": {
+    "types": [
+      "character",
+      "npc",
+      "trap",
+      "object"
+    ],
   "Item":{},
 }
