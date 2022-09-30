@@ -1,104 +1,60 @@
 {
-  "name": "3.5e",
-  "title": "Dungeons and Dragons 3.5e",
-  "description": "This game system is used to play Dungeons and Dragons 3.5e",
-  "author": "Furcht",
-  "version": "0.0.1",
-  "minimumCoreVersion": "0.6.4",
-  "compatibleCoreVersion": "0.6.4",
-  "scripts": [ ],
+  "id": "mysystem",
+  "title": "My version of 3.5e",
+  "description": "Playable version of D&D 3.5e",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10",
+    "maximum": "10"
+  },
+  "authors": [
+    {
+      "name": "Furcht",
+      "url": "NA",
+	  "email": "NA",
+	  "discord": "Furcht"
+    }
+  ],
+  "scripts": [
+    "scripts/system-script-1.js",
+    "scripts/system-script-2.js"
+  ],
   "esmodules": [
-    "3.5e.js"
+    "scripts/system-module-1.mjs"
   ],
   "styles": [
-    "3.5e.css"
+    "styles/system-styles-1.css",
+    "styles/system-styles-2.css"
   ],
   "packs": [
     {
-      "name": "races",
-      "label": "Races",
-      "system": "dnd3.5e",
-      "path": "./packs/races.db",
-      "entity": "Item",
-      "type": "Item"
-    },
-    {
-      "name": "classes",
-      "label": "Classes",
-      "system": "dnd3.5e",
-      "path": "./packs/classes.db",
-      "entity": "Item",
-      "type": "Item"
-    },
-    {
-      "name": "skills",
-      "label": "Skills",
-      "system": "dnd3.5e",
-      "path": "./packs/skills.db",
-      "entity": "JournalEntry",
-      "type": "JournalEntry"
-    },
-    {
-      "name": "feats",
-      "label": "Feats",
-      "system": "dnd3.5e",
-      "path": "./packs/feats.db",
-      "entity": "JournalEntry",
-      "type": "JournalEntry"
-    },
-    {
-      "name": "equipment",
-      "label": "Equipment",
-      "system": "dnd3.5e",
-      "path": "./packs/equipment.db",
-      "entity": "Item",
-      "type": "Item"
-    },
-    {
-      "name": "goods",
-      "label": "Goods",
-      "system": "dnd3.5e",
-      "path": "./packs/goods.db",
-      "entity": "Item",
-      "type": "Item"
-    },
-    {
-      "name": "spells",
-      "label": "Spells",
-      "system": "dnd3.5e",
-      "path": "./packs/spells.db",
-      "entity": "Item",
-      "type": "Item"
-    },
-    {
-      "name": "rules",
-      "label": "Rules",
-      "system": "dnd3.5e",
-      "path": "./packs/rules.db",
-      "entity": "JournalEntry",
-      "type": "JournalEntry"
-    },
-    {
       "name": "monsters",
-      "label": "Monster Manual",
-      "system": "dnd3.5e",
-      "path": "./packs/monsters.db",
-      "entity": "Actor",
+      "label": "My Monsters",
+      "path": "packs/monsters.db",
       "type": "Actor"
     },
+    {
+      "name": "items",
+      "label": "My Items",
+      "path": "packs/items.db",
+      "type": "Item"
+    }
   ],
-  "languages": [
+"languages": [
     {
       "lang": "en",
       "name": "English",
       "path": "lang/en.json"
     }
   ],
-  "socket": true,
+  "socket": false,
   "initiative": "1d20",
   "gridDistance": 10,
   "gridUnits": "ft",
   "primaryTokenAttribute": "resources.health",
   "secondaryTokenAttribute": "resources.power",
-  "url": "https://github.com/FurchtK/3.5e",
+  "url": "https://your/hosted/system/repo/",
+  "manifest": "https://your/hosted/system/repo/system.json",
+  "download": "https://your/packaged/download/archive.zip"
 }
